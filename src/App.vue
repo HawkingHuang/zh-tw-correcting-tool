@@ -49,11 +49,11 @@ html {
 }
 
 .route-enter-active {
-  transition: opacity 0.2s ease-out;
+  transition: opacity 0.3s ease-out;
 }
 
 .route-leave-active {
-  transition: opacity 0.2s ease-in;
+  transition: opacity 0.3s ease-in;
 }
 
 .route-enter-to,

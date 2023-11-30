@@ -3,7 +3,7 @@
     <base-card>
       <section class="text-input-section">
         <div class="original field">
-          <label for="original-text">Original</label>
+          <label for="original-text" class="original-title">Original</label>
           <textarea
             id="original-text"
             placeholder="Enter Traditional Chinese text"
@@ -11,13 +11,17 @@
           ></textarea>
         </div>
         <div class="result field">
-          <label for="result-text">Corrected</label>
+          <label for="result-text" class="result-title">Corrected</label>
           <div id="result-text" class="result-text"></div>
         </div>
       </section>
       <section class="button-section">
-        <button class="btn" @click="check">Check</button>
-        <button class="btn" @click="reset">Reset</button>
+        <button class="btn" @click="check">
+          <ion-icon name="checkmark-outline"></ion-icon>
+        </button>
+        <button class="btn" @click="reset">
+          <ion-icon name="refresh-outline"></ion-icon>
+        </button>
       </section>
     </base-card>
   </div>
@@ -66,7 +70,7 @@ export default {
   grid-template-columns: repeat(2, 1fr);
   align-items: center;
   justify-items: center;
-  margin: 3rem auto;
+  margin: 1.5rem auto;
 }
 
 .field {
@@ -80,6 +84,11 @@ export default {
   text-align: center;
 }
 
+.original-title,
+.result-title {
+  font-weight: 700;
+}
+
 label {
   display: block;
   font-size: 3rem;
@@ -91,7 +100,7 @@ textarea,
   width: 90%;
   height: 50rem;
   border: 3px solid #ced4da;
-  border-radius: 5px;
+  border-radius: 10px;
   resize: none;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   font-size: large;
@@ -112,10 +121,17 @@ textarea,
 }
 
 .btn {
+  width: 6rem;
+  height: 2.4rem;
   font-size: medium;
-  background-color: #212529;
+  background-color: #fff;
   color: #f8f9fa;
-  border-radius: 3px;
+  border-radius: 15px;
   cursor: pointer;
+}
+
+ion-icon {
+  font-size: 1.8rem;
+  color: black;
 }
 </style>

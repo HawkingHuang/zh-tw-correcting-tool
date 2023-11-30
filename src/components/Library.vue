@@ -9,8 +9,12 @@
         <ul v-if="!noResult">
           <li class="word-item-list">
             <div class="word-item-title">
-              <div class="correct">Correct</div>
-              <div class="incorrect">Incorrect</div>
+              <div class="correct">
+                <ion-icon name="shield-checkmark-outline"></ion-icon>
+              </div>
+              <div class="incorrect">
+                <ion-icon name="close-circle-outline"></ion-icon>
+              </div>
             </div>
           </li>
         </ul>
@@ -84,7 +88,12 @@ export default {
   list-style-type: none;
 }
 
-.word-item-title,
+.word-item-title {
+  display: flex;
+  justify-content: center;
+  gap: 2.8rem;
+}
+
 .word-item {
   display: flex;
   justify-content: center;

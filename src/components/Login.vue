@@ -17,7 +17,9 @@
             </div>
             <input type="password" id="password" v-model="password" />
           </div>
-          <button type="submit">Log In</button>
+          <button type="submit">
+            <ion-icon name="log-in-outline"></ion-icon>
+          </button>
         </form>
       </div>
     </base-card>
@@ -88,12 +90,12 @@ input:focus {
 }
 
 button {
+  width: 6rem;
   padding: 0.2rem;
   margin: 2rem auto;
   font-size: medium;
-  background-color: #212529;
-  color: #f8f9fa;
-  border-radius: 3px;
+  background-color: #fff;
+  border-radius: 15px;
   cursor: pointer;
 }
 
@@ -105,6 +107,7 @@ button {
 }
 
 ion-icon {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
+  color: black;
 }
 </style>

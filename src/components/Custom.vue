@@ -6,26 +6,28 @@
         <form>
           <div class="custom-flex">
             <div class="custom-flex-child">
-              <label for="correct">Correct</label>
+              <!-- <label for="correct">Correct</label> -->
               <input
                 v-model="formData.correct"
                 type="text"
                 name="correct"
+                placeholder="Enter a CORRECT word"
                 required
               />
             </div>
             <div class="custom-flex-child">
-              <label for="incorrect">Incorrect</label>
+              <!-- <label for="incorrect">Incorrect</label> -->
               <input
                 v-model="formData.incorrect"
                 type="text"
                 name="incorrect"
+                placeholder="Enter a INCORRECT word"
                 required
               />
             </div>
           </div>
           <button @click.prevent="submitForm" class="btn">
-            Add a new word
+            <ion-icon name="add-outline"></ion-icon>
           </button>
         </form>
       </div>
@@ -58,7 +60,7 @@ export default {
       // } catch (error) {
       //   console.error("Error adding document: ", error);
       // }
-      const subCollectionName = "bopomofo-7";
+      const subCollectionName = "bopomofo-8";
 
       const colRef = collection(
         db,
@@ -117,12 +119,18 @@ input {
 }
 
 .btn {
+  width: 6rem;
+  height: 2.4rem;
   padding: 0.2rem;
   margin: 4rem auto;
   font-size: medium;
-  background-color: #212529;
-  color: #f8f9fa;
-  border-radius: 3px;
+  background-color: #fff;
+  border-radius: 15px;
   cursor: pointer;
+}
+
+ion-icon {
+  font-size: 1.8rem;
+  color: black;
 }
 </style>
