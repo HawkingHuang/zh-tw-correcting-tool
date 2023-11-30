@@ -4,6 +4,7 @@ export default createStore({
   state() {
     return {
       words: [],
+      loggedIn: false,
     };
   },
   getters: {
@@ -14,6 +15,9 @@ export default createStore({
   mutations: {
     setWords(state, words) {
       state.words = words;
+    },
+    LogInOut(state) {
+      state.loggedIn = !state.loggedIn;
     },
   },
   actions: {},

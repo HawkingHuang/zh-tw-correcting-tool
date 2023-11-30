@@ -49,6 +49,7 @@ export default {
         const user = userCredential.user;
         console.log("User logged in:", user);
         this.$router.push("/");
+        this.$store.commit("LogInOut");
       } catch (error) {
         console.error("Registration error:", error.message);
       }

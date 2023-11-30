@@ -114,4 +114,9 @@ export default {
   font-size: 2rem;
   color: red;
 }
+
+ion-icon {
+  font-size: 2.4rem;
+  color: black;
+}
 </style>

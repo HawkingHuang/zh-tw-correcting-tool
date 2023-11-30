@@ -5,6 +5,7 @@ import About from "../views/About.vue";
 import Library from "../views/Library.vue";
 import SignUp from "../views/SignUp.vue";
 import Login from "../views/Login.vue";
+import Logout from "../views/Logout.vue";
 
 const routes = [
   {
@@ -36,6 +37,11 @@ const routes = [
     path: "/login",
     name: "login",
     component: Login,
+  },
+  {
+    path: "/logout",
+    name: "logout",
+    component: Logout,
   },
 ];
 

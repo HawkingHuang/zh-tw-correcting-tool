@@ -34,9 +34,14 @@
             ><ion-icon name="person-add-outline"></ion-icon>Sign Up</router-link
           >
         </li>
-        <li>
+        <li v-if="!$store.state.loggedIn">
           <router-link to="/login" class="nav-section-button"
             ><ion-icon name="log-in-outline"></ion-icon>Log In</router-link
+          >
+        </li>
+        <li v-if="$store.state.loggedIn">
+          <router-link to="/logout" class="nav-section-button"
+            ><ion-icon name="log-out-outline"></ion-icon>Log Out</router-link
           >
         </li>
       </div>
@@ -62,7 +67,7 @@ export default {};
 
 .nav-section-list-child {
   display: flex;
-  gap: 4.8rem;
+  gap: 4rem;
 }
 
 .nav-section-button:link,
@@ -85,7 +90,7 @@ export default {};
 a:active,
 a:hover,
 a.router-link-active {
-  background-color: #dee2e6;
+  background-color: #fff;
 }
 
 ion-icon {
