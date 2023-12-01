@@ -82,10 +82,10 @@ export default {};
   gap: 0.5rem;
 }
 
-.nav-section-button:hover,
+/*.nav-section-button:hover,
 .nav-section-button:active {
   color: #3b5bdb;
-}
+}*/
 
 a:active,
 a:hover,

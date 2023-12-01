@@ -76,11 +76,11 @@ label {
 }
 
 input {
-  height: 2.4rem;
-  font-size: 2rem;
-  font: inherit;
+  width: 25rem;
+  height: 3rem;
+  font-size: 2.4rem;
   border: 1px solid #ccc;
-  padding: 0.15rem;
+  padding: 0.3rem;
   border-radius: 5px;
 }
 

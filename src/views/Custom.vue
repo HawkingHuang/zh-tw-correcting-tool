@@ -60,7 +60,7 @@ export default {
       // } catch (error) {
       //   console.error("Error adding document: ", error);
       // }
-      const subCollectionName = "bopomofo-8";
+      const subCollectionName = "bopomofo-9";
 
       const colRef = collection(
         db,
