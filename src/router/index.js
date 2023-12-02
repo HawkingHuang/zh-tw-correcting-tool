@@ -6,6 +6,7 @@ import Library from "../views/Library.vue";
 import SignUp from "../views/SignUp.vue";
 import Login from "../views/Login.vue";
 import Logout from "../views/Logout.vue";
+import Bopomofo from "../views/Bopomofo.vue";
 
 const routes = [
   {
@@ -27,6 +28,14 @@ const routes = [
     path: "/library",
     name: "library",
     component: Library,
+    children: [
+      {
+        name: "bopomofo",
+        path: ":bopomofoId",
+        component: Bopomofo,
+        props: true,
+      },
+    ],
   },
   {
     path: "/signup",

@@ -4,7 +4,26 @@
       <div class="search-bar">
         <input v-model="searchTerm" placeholder="Search..." />
       </div>
-      <div class="library-section">
+      <div class="router-link-section" v-if="showRouterLink">
+        <ul>
+          <li class="router-list">
+            <router-link
+              class="router-btn"
+              v-for="(subset, index) in subsets"
+              :key="index"
+              :to="bopomofoLink(index)"
+            >
+              {{ subset.label }}
+            </router-link>
+          </li>
+        </ul>
+      </div>
+      <router-view v-slot="slotProps" v-if="showRouterLink">
+        <transition name="route" mode="out-in">
+          <component :is="slotProps.Component"></component>
+        </transition>
+      </router-view>
+      <div class="library-section" v-if="!showRouterLink">
         <p v-if="noResult" class="no-result">No results found</p>
         <ul v-if="!noResult">
           <li class="word-item-list">
@@ -36,10 +55,54 @@
 </template>
 
 <script>
+import Bopomofo from "./Bopomofo.vue";
 export default {
+  components: {
+    Bopomofo,
+  },
   data() {
     return {
       searchTerm: "",
+      showRouterLink: true,
+      subsets: [
+        { name: "bopomofo-1", label: "ㄅ" },
+        { name: "bopomofo-3", label: "ㄆ" },
+        { name: "bopomofo-2", label: "ㄇ" },
+        { name: "bopomofo-4", label: "ㄈ" },
+        { name: "bopomofo-5", label: "ㄉ" },
+        { name: "bopomofo-6", label: "ㄊ" },
+        { name: "bopomofo-7", label: "ㄋ" },
+        { name: "bopomofo-8", label: "ㄌ" },
+        { name: "bopomofo-9", label: "ㄍ" },
+        { name: "bopomofo-10", label: "ㄎ" },
+        { name: "bopomofo-11", label: "ㄏ" },
+        { name: "bopomofo-12", label: "ㄐ" },
+        { name: "bopomofo-13", label: "ㄑ" },
+        { name: "bopomofo-14", label: "ㄒ" },
+        { name: "bopomofo-15", label: "ㄓ" },
+        { name: "bopomofo-16", label: "ㄔ" },
+        { name: "bopomofo-17", label: "ㄕ" },
+        { name: "bopomofo-18", label: "ㄖ" },
+        { name: "bopomofo-19", label: "ㄗ" },
+        { name: "bopomofo-20", label: "ㄘ" },
+        { name: "bopomofo-21", label: "ㄙ" },
+        { name: "bopomofo-22", label: "ㄧ" },
+        { name: "bopomofo-23", label: "ㄨ" },
+        { name: "bopomofo-24", label: "ㄩ" },
+        { name: "bopomofo-25", label: "ㄚ" },
+        { name: "bopomofo-26", label: "ㄛ" },
+        { name: "bopomofo-27", label: "ㄜ" },
+        { name: "bopomofo-28", label: "ㄝ" },
+        { name: "bopomofo-29", label: "ㄞ" },
+        { name: "bopomofo-30", label: "ㄟ" },
+        { name: "bopomofo-31", label: "ㄠ" },
+        { name: "bopomofo-32", label: "ㄡ" },
+        { name: "bopomofo-33", label: "ㄢ" },
+        { name: "bopomofo-34", label: "ㄣ" },
+        { name: "bopomofo-35", label: "ㄤ" },
+        { name: "bopomofo-36", label: "ㄥ" },
+        { name: "bopomofo-37", label: "ㄦ" },
+      ],
     };
   },
   computed: {
@@ -59,10 +122,24 @@ export default {
       return this.filteredWords.length === 0;
     },
   },
+  watch: {
+    searchTerm(newValue) {
+      if (newValue.trim() !== "") {
+        this.showRouterLink = false;
+      } else {
+        this.showRouterLink = true;
+      }
+    },
+  },
+  methods: {
+    bopomofoLink(index) {
+      return `/library/bopomofo-${index + 1}`;
+    },
+  },
 };
 </script>
 
-<style scoped>
+<style>
 .search-bar {
   padding: 2rem;
 }
@@ -118,5 +195,65 @@ export default {
 ion-icon {
   font-size: 2.4rem;
   color: black;
+}
+
+.router-link-section {
+  margin: 2rem;
+  display: flex;
+  overflow-x: auto;
+  padding: 1rem 0;
+}
+
+.router-link-section::-webkit-scrollbar {
+  height: 1rem;
+}
+
+.router-link-section::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 6px;
+}
+
+.router-link-section::-webkit-scrollbar-track {
+  background-color: #f1f3f5;
+}
+
+.router-list {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  list-style-type: none;
+  gap: 2rem;
+}
+
+.router-btn {
+  text-decoration: none;
+  font-size: 2rem;
+  color: black;
+  padding: 0.5rem;
+  border-radius: 5px;
+}
+
+a:active,
+a:hover,
+a.router-link-active {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.route-enter-from,
+.route-leave-to {
+  opacity: 0;
+}
+
+.route-enter-active {
+  transition: opacity 0.3s ease-out;
+}
+
+.route-leave-active {
+  transition: opacity 0.3s ease-in;
+}
+
+.route-enter-to,
+.route-leave-from {
+  opacity: 1;
 }
 </style>
