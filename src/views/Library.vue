@@ -3,6 +3,11 @@
     <base-card>
       <div class="search-bar">
         <input v-model="searchTerm" placeholder="Search..." />
+        <ion-icon
+          name="close-circle-outline"
+          class="empty-icon"
+          @click="emptyField"
+        ></ion-icon>
       </div>
       <div class="router-link-section" v-if="showRouterLink">
         <ul>
@@ -19,7 +24,7 @@
         </ul>
       </div>
       <router-view v-slot="slotProps" v-if="showRouterLink">
-        <transition name="route" mode="out-in">
+        <transition name="route-library" mode="out-in" appear>
           <component :is="slotProps.Component"></component>
         </transition>
       </router-view>
@@ -135,13 +140,25 @@ export default {
     bopomofoLink(index) {
       return `/library/bopomofo-${index + 1}`;
     },
+    emptyField() {
+      this.searchTerm = "";
+    },
   },
 };
 </script>
 
 <style>
 .search-bar {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
   padding: 2rem;
+}
+
+.empty-icon:hover {
+  cursor: pointer;
 }
 
 .search-bar input {
@@ -201,7 +218,7 @@ ion-icon {
   margin: 2rem;
   display: flex;
   overflow-x: auto;
-  padding: 1rem 0;
+  padding: 1rem 0.4rem;
 }
 
 .router-link-section::-webkit-scrollbar {
@@ -239,21 +256,43 @@ a.router-link-active {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-.route-enter-from,
-.route-leave-to {
+/*.route-library-enter-from,
+.route-library-leave-to {
   opacity: 0;
 }
 
-.route-enter-active {
+.route-library-enter-active {
   transition: opacity 0.3s ease-out;
 }
 
-.route-leave-active {
+.route-library-leave-active {
   transition: opacity 0.3s ease-in;
 }
 
-.route-enter-to,
-.route-leave-from {
+.route-library-enter-to,
+.route-library-leave-from {
   opacity: 1;
 }
+@keyframes route-library-enter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes route-library-leave {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.route-library-enter-active,
+.route-library-leave-active {
+  animation: route-library-enter 0.3s ease-out, route-library-leave 0.3s ease-in;
+}*/
 </style>
