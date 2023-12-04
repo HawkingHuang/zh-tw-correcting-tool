@@ -67,7 +67,7 @@ export default {};
 
 .nav-section-list-child {
   display: flex;
-  gap: 4rem;
+  gap: 2rem;
 }
 
 .nav-section-button:link,

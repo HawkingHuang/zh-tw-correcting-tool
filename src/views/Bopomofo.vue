@@ -13,7 +13,7 @@
         </div>
       </li>
     </ul> -->
-    <ul class="word-grid">
+    <ul class="word-grid" v-else>
       <li
         v-for="(word, index) in filteredWords"
         :key="index"
@@ -58,7 +58,7 @@ export default {
       });
     },
     noResult() {
-      return this.filteredWords.length === 0;
+      return this.words.length === 0;
     },
   },
   methods: {
@@ -101,6 +101,7 @@ export default {
 
           console.log("Fetched words:", this.words);
         } else {
+          this.words = [];
           console.error("Document not found");
         }
       } catch (error) {
