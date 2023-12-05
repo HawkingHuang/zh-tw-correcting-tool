@@ -51,6 +51,10 @@ export default {
         this.$router.push("/");
         this.$store.commit("LogInOut");
         this.$store.commit("setUserEmail", user.email);
+        this.$store.commit("showWelcomeOrNot");
+        setTimeout(() => {
+          this.$store.commit("showWelcomeOrNot");
+        }, 3000);
       } catch (error) {
         console.error("Registration error:", error.message);
       }

@@ -1,14 +1,11 @@
 <template>
   <div>
-    <base-card>User</base-card>
+    <base-card>{{ $store.state.userEmail.split("@")[0] }}</base-card>
   </div>
 </template>
 
 <script>
-import BaseCard from "@/components/BaseCard.vue";
-export default {
-  components: { BaseCard },
-};
+export default {};
 </script>
 
 <style></style>

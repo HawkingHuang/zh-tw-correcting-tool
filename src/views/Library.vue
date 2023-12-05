@@ -29,8 +29,8 @@
         </transition>
       </router-view>
       <div class="library-section" v-if="!showRouterLink">
-        <p v-if="noResult" class="no-result">No results found</p>
-        <ul v-if="!noResult">
+        <p v-if="noResult" class="no-result">No Results Found</p>
+        <!-- <ul v-if="!noResult">
           <li class="word-item-list">
             <div class="word-item-title">
               <div class="correct">
@@ -41,7 +41,7 @@
               </div>
             </div>
           </li>
-        </ul>
+        </ul> -->
         <ul>
           <li
             v-for="(word, index) in filteredWords"
@@ -226,7 +226,7 @@ ion-icon {
 }
 
 .router-link-section::-webkit-scrollbar-thumb {
-  background-color: #888;
+  background-color: #ced4da;
   border-radius: 6px;
 }
 

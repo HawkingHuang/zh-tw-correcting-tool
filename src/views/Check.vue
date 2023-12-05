@@ -6,8 +6,9 @@
           <label for="original-text" class="original-title">Original</label>
           <textarea
             id="original-text"
-            placeholder="Enter Traditional Chinese text"
+            placeholder="Enter Traditional Chinese here..."
             v-model="userInput"
+            class="textarea"
           ></textarea>
         </div>
         <div class="result field">
@@ -105,6 +106,23 @@ textarea,
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   font-size: large;
   padding: 0.5rem;
+  overflow: auto;
+}
+
+.textarea::-webkit-scrollbar,
+.result-text::-webkit-scrollbar {
+  height: 1rem;
+}
+
+.textarea::-webkit-scrollbar-thumb,
+.result-text::-webkit-scrollbar-thumb {
+  background-color: #dee2e6;
+  border-radius: 10px;
+}
+
+.textarea::-webkit-scrollbar-track,
+.result-text::-webkit-scrollbar-track {
+  background-color: #f1f3f5;
 }
 
 .result-text {

@@ -1,18 +1,7 @@
 <template>
   <div class="library-section">
-    <p v-if="noResult" class="no-result">No results found</p>
-    <!-- <ul v-if="!noResult">
-      <li class="word-item-list">
-        <div class="word-item-title">
-          <div class="correct">
-            <ion-icon name="shield-checkmark-outline"></ion-icon>
-          </div>
-          <div class="incorrect">
-            <ion-icon name="close-circle-outline"></ion-icon>
-          </div>
-        </div>
-      </li>
-    </ul> -->
+    <p v-if="loading" class="loading">Loading...</p>
+    <p v-else-if="noResult" class="no-result">No Collection Yet</p>
     <ul class="word-grid" v-else>
       <li v-for="(word, index) in words" :key="index" class="word-item-list">
         <div class="word-item">
@@ -41,6 +30,7 @@ export default {
     return {
       searchTerm: "",
       words: [],
+      loading: true,
     };
   },
   computed: {
@@ -74,6 +64,8 @@ export default {
     // },
     async fetchWords(bopomofoId) {
       try {
+        this.loading = true;
+
         const db = getFirestore();
         const fileRef = doc(
           db,
@@ -102,6 +94,8 @@ export default {
         }
       } catch (error) {
         console.error("Error fetching words:", error);
+      } finally {
+        this.loading = false;
       }
     },
   },
@@ -121,6 +115,7 @@ export default {
   padding: 2rem;
 }
 
+.loading,
 .no-result {
   font-size: 2rem;
   font-weight: 700;

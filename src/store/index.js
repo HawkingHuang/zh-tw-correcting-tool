@@ -6,6 +6,7 @@ export default createStore({
       words: [],
       loggedIn: false,
       userEmail: "",
+      showWelcome: false,
     };
   },
   getters: {
@@ -22,6 +23,9 @@ export default createStore({
     },
     setUserEmail(state, email) {
       state.userEmail = email;
+    },
+    showWelcomeOrNot(state) {
+      state.showWelcome = !state.showWelcome;
     },
   },
   actions: {},
