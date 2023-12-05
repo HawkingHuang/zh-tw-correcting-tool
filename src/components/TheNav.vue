@@ -29,7 +29,13 @@
         </li>
       </div>
       <div class="nav-section-list-child">
-        <li>
+        <li v-if="$store.state.loggedIn">
+          <router-link to="/user" class="nav-section-button"
+            ><ion-icon name="person-outline"></ion-icon
+            >{{ $store.state.userEmail.split("@")[0] }}</router-link
+          >
+        </li>
+        <li v-if="!$store.state.loggedIn">
           <router-link to="/signup" class="nav-section-button"
             ><ion-icon name="person-add-outline"></ion-icon>Sign Up</router-link
           >

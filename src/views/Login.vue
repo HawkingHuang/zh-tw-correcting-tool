@@ -50,6 +50,7 @@ export default {
         console.log("User logged in:", user);
         this.$router.push("/");
         this.$store.commit("LogInOut");
+        this.$store.commit("setUserEmail", user.email);
       } catch (error) {
         console.error("Registration error:", error.message);
       }

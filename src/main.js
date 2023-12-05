@@ -55,6 +55,7 @@ const words = [];
 querySnapshot.docs.forEach((doc) => {
   words.push({ ...doc.data() });
 });
+// console.log(words);
 
 store.commit("setWords", words);
 

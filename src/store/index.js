@@ -5,6 +5,7 @@ export default createStore({
     return {
       words: [],
       loggedIn: false,
+      userEmail: "",
     };
   },
   getters: {
@@ -18,6 +19,9 @@ export default createStore({
     },
     LogInOut(state) {
       state.loggedIn = !state.loggedIn;
+    },
+    setUserEmail(state, email) {
+      state.userEmail = email;
     },
   },
   actions: {},

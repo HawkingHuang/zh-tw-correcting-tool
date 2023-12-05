@@ -3,6 +3,7 @@ import Check from "../views/Check.vue";
 import Custom from "../views/Custom.vue";
 import About from "../views/About.vue";
 import Library from "../views/Library.vue";
+import User from "../views/User.vue";
 import SignUp from "../views/SignUp.vue";
 import Login from "../views/Login.vue";
 import Logout from "../views/Logout.vue";
@@ -36,6 +37,11 @@ const routes = [
         props: true,
       },
     ],
+  },
+  {
+    path: "/user",
+    name: "user",
+    component: User,
   },
   {
     path: "/signup",

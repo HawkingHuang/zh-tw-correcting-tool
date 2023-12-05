@@ -14,11 +14,7 @@
       </li>
     </ul> -->
     <ul class="word-grid" v-else>
-      <li
-        v-for="(word, index) in filteredWords"
-        :key="index"
-        class="word-item-list"
-      >
+      <li v-for="(word, index) in words" :key="index" class="word-item-list">
         <div class="word-item">
           <div class="correct">{{ word.correct }}</div>
           <div class="incorrect">{{ word.incorrect }}</div>
@@ -48,15 +44,15 @@ export default {
     };
   },
   computed: {
-    filteredWords() {
-      return this.words.filter((word) => {
-        const searchString = this.searchTerm;
-        return (
-          word.correct.includes(searchString) ||
-          word.incorrect.includes(searchString)
-        );
-      });
-    },
+    // filteredWords() {
+    //   return this.words.filter((word) => {
+    //     const searchString = this.searchTerm;
+    //     return (
+    //       word.correct.includes(searchString) ||
+    //       word.incorrect.includes(searchString)
+    //     );
+    //   });
+    // },
     noResult() {
       return this.words.length === 0;
     },

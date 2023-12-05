@@ -28,6 +28,7 @@ export default {
         console.log("The user signed out");
         this.$router.push("/");
         this.$store.commit("LogInOut");
+        this.$store.commit("setUserEmail", "");
       } catch (error) {
         console.error(error.message);
       }
