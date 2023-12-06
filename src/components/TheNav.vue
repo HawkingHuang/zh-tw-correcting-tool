@@ -67,8 +67,9 @@ export default {};
   padding: 2rem 3rem;
   justify-content: space-between;
   font-size: 2rem;
-  background-color: #f1f3f5;
+  background-color: white;
   margin: 0;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.05);
 }
 
 .nav-section-list-child {

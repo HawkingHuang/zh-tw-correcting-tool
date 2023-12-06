@@ -18,8 +18,11 @@ export default createStore({
     setWords(state, words) {
       state.words = words;
     },
-    LogInOut(state) {
-      state.loggedIn = !state.loggedIn;
+    logIn(state) {
+      state.loggedIn = true;
+    },
+    logOut(state) {
+      state.loggedIn = false;
     },
     setUserEmail(state, email) {
       state.userEmail = email;

@@ -9,6 +9,7 @@
               <label for="email">Email</label>
             </div>
             <input type="email" id="email" v-model="email" />
+            <!-- <p class="hint">Invalid Email</p> -->
           </div>
           <div class="form-control">
             <div class="flex">
@@ -16,6 +17,7 @@
               <label for="password">Password</label>
             </div>
             <input type="password" id="password" v-model="password" />
+            <!-- <p class="hint">Invalid Password</p> -->
           </div>
           <button type="submit">
             <ion-icon name="log-in-outline"></ion-icon>
@@ -27,7 +29,11 @@
 </template>
 
 <script>
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+} from "firebase/auth";
 
 export default {
   data() {
@@ -35,6 +41,22 @@ export default {
       email: "",
       password: "",
     };
+  },
+  mounted() {
+    const auth = getAuth();
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        this.$store.commit("logIn");
+        this.$store.commit("setUserEmail", user.email);
+        this.$store.commit("showWelcomeOrNot");
+        setTimeout(() => {
+          this.$store.commit("showWelcomeOrNot");
+        }, 3000);
+      } else {
+        this.$store.commit("logOut");
+      }
+    });
   },
   methods: {
     async login() {
@@ -49,12 +71,12 @@ export default {
         const user = userCredential.user;
         console.log("User logged in:", user);
         this.$router.push("/");
-        this.$store.commit("LogInOut");
-        this.$store.commit("setUserEmail", user.email);
-        this.$store.commit("showWelcomeOrNot");
-        setTimeout(() => {
-          this.$store.commit("showWelcomeOrNot");
-        }, 3000);
+        // this.$store.commit("LogIn");
+        // this.$store.commit("setUserEmail", user.email);
+        // this.$store.commit("showWelcomeOrNot");
+        // setTimeout(() => {
+        //   this.$store.commit("showWelcomeOrNot");
+        // }, 3000);
       } catch (error) {
         console.error("Registration error:", error.message);
       }
@@ -115,5 +137,11 @@ button {
 ion-icon {
   font-size: 1.4rem;
   color: black;
+}
+
+.hint {
+  color: orange;
+  font-size: 1.2rem;
+  margin: 0.5rem;
 }
 </style>

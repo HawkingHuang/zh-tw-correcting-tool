@@ -29,11 +29,32 @@
 </template>
 
 <script>
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+} from "firebase/auth";
 export default {
   data() {
     return {
       userInput: "",
     };
+  },
+  mounted() {
+    const auth = getAuth();
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        this.$store.commit("logIn");
+        this.$store.commit("setUserEmail", user.email);
+        this.$store.commit("showWelcomeOrNot");
+        setTimeout(() => {
+          this.$store.commit("showWelcomeOrNot");
+        }, 3000);
+      } else {
+        this.$store.commit("logOut");
+      }
+    });
   },
   computed: {
     words() {

@@ -50,16 +50,7 @@ export default {
   },
   methods: {
     async submitForm() {
-      // const colRef = collection(db, "zh-tw-correcting-library");
-
-      // try {
-      //   await addDoc(colRef, this.formData);
-      //   console.log("Document added successfully!");
-      //   this.formData.correct = "";
-      //   this.formData.incorrect = "";
-      // } catch (error) {
-      //   console.error("Error adding document: ", error);
-      // }
+      // For adding central database
       const subCollectionName = "bopomofo-31";
 
       const colRef = collection(
@@ -77,6 +68,7 @@ export default {
       } catch (error) {
         console.error("Error adding document: ", error);
       }
+      // For adding indivisual database
     },
   },
 };

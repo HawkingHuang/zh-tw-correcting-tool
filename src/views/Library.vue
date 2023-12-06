@@ -201,7 +201,8 @@ export default {
 
 .correct {
   font-size: 2rem;
-  color: blue;
+  color: black;
+  font-weight: 600;
 }
 
 .incorrect {
@@ -226,7 +227,7 @@ ion-icon {
 }
 
 .router-link-section::-webkit-scrollbar-thumb {
-  background-color: #ced4da;
+  background-color: #dee2e6;
   border-radius: 6px;
 }
 

@@ -17,9 +17,22 @@
 </template>
 
 <script>
-import { getAuth, signOut } from "firebase/auth";
+import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
 
 export default {
+  mounted() {
+    const auth = getAuth();
+
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        this.$store.commit("logOut");
+        this.$store.commit("setUserEmail", "");
+        console.log(this.$store.state.userEmail);
+      } else {
+        console.log("Failed to log out");
+      }
+    });
+  },
   methods: {
     async logOut() {
       const auth = getAuth();
@@ -27,8 +40,8 @@ export default {
         await signOut(auth);
         console.log("The user signed out");
         this.$router.push("/");
-        this.$store.commit("LogInOut");
-        this.$store.commit("setUserEmail", "");
+        this.$store.commit("logOut");
+        // this.$store.commit("setUserEmail", "");
       } catch (error) {
         console.error(error.message);
       }
