@@ -51,13 +51,31 @@ export default {
   methods: {
     async submitForm() {
       // For adding central database
-      const subCollectionName = "bopomofo-31";
+      // const subCollectionName = "bopomofo-31";
+
+      // const colRef = collection(
+      //   db,
+      //   "zh-tw-correcting-library-categorized",
+      //   subCollectionName,
+      //   "bopomofo"
+      // );
+
+      // try {
+      //   await addDoc(colRef, this.formData);
+      //   console.log("Document added successfully!");
+      //   this.formData.correct = "";
+      //   this.formData.incorrect = "";
+      // } catch (error) {
+      //   console.error("Error adding document: ", error);
+      // }
+      // For adding indivisual database
+      const subCollectionName = this.$store.state.userEmail.split("@")[0];
 
       const colRef = collection(
         db,
-        "zh-tw-correcting-library-categorized",
+        "zh-tw-correcting-library-users",
         subCollectionName,
-        "bopomofo"
+        "users-custom-words"
       );
 
       try {
@@ -68,7 +86,6 @@ export default {
       } catch (error) {
         console.error("Error adding document: ", error);
       }
-      // For adding indivisual database
     },
   },
 };

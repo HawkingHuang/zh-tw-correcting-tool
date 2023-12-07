@@ -29,11 +29,9 @@
 </template>
 
 <script>
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-} from "firebase/auth";
+import { db } from "../main.js";
+import { getDocs, collection } from "firebase/firestore";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 export default {
   data() {
     return {
@@ -48,8 +46,10 @@ export default {
         this.$store.commit("logIn");
         this.$store.commit("setUserEmail", user.email);
         this.$store.commit("showWelcomeOrNot");
+        // console.log(this.$store.state.userEmail.split("@")[0]);
         setTimeout(() => {
           this.$store.commit("showWelcomeOrNot");
+          this.fetchCustomWords();
         }, 3000);
       } else {
         this.$store.commit("logOut");
@@ -62,6 +62,26 @@ export default {
     },
   },
   methods: {
+    async fetchCustomWords() {
+      // Users custom words
+      const subCollectionName = this.$store.state.userEmail.split("@")[0];
+
+      const colRef = collection(
+        db,
+        "zh-tw-correcting-library-users",
+        subCollectionName,
+        "users-custom-words"
+      );
+
+      const words = [];
+      const querySnapshotCustom = await getDocs(colRef);
+      querySnapshotCustom.docs.forEach((doc) => {
+        words.push({ ...doc.data() });
+        console.log(words);
+      });
+
+      this.$store.commit("addCustomWords", words);
+    },
     check() {
       let correctedText = this.userInput;
       this.words.forEach((word) => {

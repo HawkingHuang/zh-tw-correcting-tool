@@ -1,0 +1,15 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "zh-tw-correcting-library",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "timestamp",
+          "order": "DESCENDING"
+        }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}

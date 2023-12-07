@@ -4,18 +4,24 @@ import router from "./router";
 import store from "./store";
 
 import BaseCard from "./components/BaseCard.vue";
-const app = createApp(App);
+const vueApp = createApp(App);
 
-app.use(router);
-app.use(store);
+vueApp.use(router);
+vueApp.use(store);
 
-app.component("base-card", BaseCard);
+vueApp.component("base-card", BaseCard);
 
-app.mount("#app");
+vueApp.mount("#app");
 
 // Firebase
 import { initializeApp } from "firebase/app";
-import { getFirestore, getDocs, collectionGroup } from "firebase/firestore";
+import {
+  getFirestore,
+  getDocs,
+  collectionGroup,
+  connectFirestoreEmulator,
+} from "firebase/firestore";
+
 const firebaseConfig = {
   apiKey: "AIzaSyDRi_N0bR_9OjOZVdciEBETd_go7ve_1GE",
   authDomain: "fir-course-48871.firebaseapp.com",
@@ -24,8 +30,15 @@ const firebaseConfig = {
   messagingSenderId: "517794616083",
   appId: "1:517794616083:web:e4d7d82ee5bf06e8b100e6",
 };
-initializeApp(firebaseConfig);
-const db = getFirestore();
+
+const firebaseApp = initializeApp(firebaseConfig);
+
+const db = getFirestore(firebaseApp);
+
+// Connect to the Firestore emulator only in development
+if (process.env.NODE_ENV === "development") {
+  connectFirestoreEmulator(db, "localhost", 8081);
+}
 
 // Categorized
 const querySnapshot = await getDocs(collectionGroup(db, "bopomofo"));
@@ -34,8 +47,27 @@ const words = [];
 querySnapshot.docs.forEach((doc) => {
   words.push({ ...doc.data() });
 });
-// console.log(words);
+console.log(words);
 
 store.commit("setWords", words);
 
-export { db };
+export { db, firebaseApp };
+
+// Users custom words
+// const subCollectionName = this.$store.state.userEmail.split("@")[0];
+
+// const colRef = collection(
+//   db,
+//   "zh-tw-correcting-library-users",
+//   subCollectionName,
+//   "users-custom-words"
+// );
+// const querySnapshotCustom = await getDocs(colRef);
+// querySnapshotCustom.docs.forEach((doc) => {
+//   words.push({ ...doc.data() });
+// });
+
+// store.commit("setWords", words);
+
+// connectFirestoreEmulator(db, "127.0.0.1", 8081);
+// export { db };

@@ -18,6 +18,10 @@ export default createStore({
     setWords(state, words) {
       state.words = words;
     },
+    addCustomWords(state, words) {
+      state.words = state.words.concat(words);
+      // console.log(words);
+    },
     logIn(state) {
       state.loggedIn = true;
     },

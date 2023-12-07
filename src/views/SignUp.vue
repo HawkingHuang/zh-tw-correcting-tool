@@ -27,6 +27,8 @@
 </template>
 
 <script>
+import { db } from "../main.js";
+import { doc, addDoc, setDoc, collection } from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 export default {
@@ -49,7 +51,21 @@ export default {
         const user = userCredential.user;
         // console.log("User registered:", user);
         this.$router.push("/");
-        this.$store.commit("LogInOut");
+        const userDocRef = doc(
+          db,
+          "zh-tw-correcting-library-users",
+          user.email.split("@")[0]
+        );
+        await setDoc(userDocRef, {});
+
+        // First sub
+        const collection1Ref = collection(userDocRef, "personal-information");
+        await addDoc(collection1Ref, {
+          email: user.email,
+        });
+        // Second sub
+        const collection2Ref = collection(userDocRef, "users-custom-words");
+        await addDoc(collection2Ref, {});
       } catch (error) {
         console.error("Registration error:", error.message);
       }

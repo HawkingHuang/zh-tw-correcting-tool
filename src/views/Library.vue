@@ -60,6 +60,8 @@
 </template>
 
 <script>
+import { db } from "../main.js";
+import { getDocs, collection } from "firebase/firestore";
 import Bopomofo from "./Bopomofo.vue";
 export default {
   components: {
@@ -197,17 +199,17 @@ export default {
 .correct,
 .incorrect {
   padding: 1rem 0;
+  font-weight: 600;
 }
 
 .correct {
   font-size: 2rem;
-  color: black;
-  font-weight: 600;
+  color: #343a40;
 }
 
 .incorrect {
   font-size: 2rem;
-  color: red;
+  color: #f03e3e;
 }
 
 ion-icon {
