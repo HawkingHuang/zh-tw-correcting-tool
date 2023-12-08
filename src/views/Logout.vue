@@ -41,8 +41,7 @@ export default {
         console.log("The user signed out");
         this.$router.push("/");
         this.$store.commit("logOut");
-        // this.$store.commit("clearWords");
-        // this.$store.commit("setUserEmail", "");
+        this.$store.commit("clearCustomWords");
       } catch (error) {
         console.error(error.message);
       }

@@ -45,12 +45,15 @@ export default {
       if (user) {
         this.$store.commit("logIn");
         this.$store.commit("setUserEmail", user.email);
-        this.$store.commit("showWelcomeOrNot");
-        // console.log(this.$store.state.userEmail.split("@")[0]);
-        setTimeout(() => {
+
+        if (!this.$store.state.welcomed) {
           this.$store.commit("showWelcomeOrNot");
-          this.fetchCustomWords();
-        }, 3000);
+          setTimeout(() => {
+            this.$store.commit("showWelcomeOrNot");
+            this.fetchCustomWords();
+          }, 3000);
+        }
+        this.$store.commit("changeWelcomed");
       } else {
         this.$store.commit("logOut");
       }
@@ -80,6 +83,7 @@ export default {
         console.log(words);
       });
 
+      this.$store.commit("clearCustomWords");
       this.$store.commit("addCustomWords", words);
     },
     check() {

@@ -4,14 +4,16 @@ export default createStore({
   state() {
     return {
       words: [],
+      customWords: [],
       loggedIn: false,
       userEmail: "",
       showWelcome: false,
+      welcomed: false,
     };
   },
   getters: {
     words(state) {
-      return state.words;
+      return state.words.concat(state.customWords);
     },
   },
   mutations: {
@@ -19,8 +21,11 @@ export default createStore({
       state.words = words;
     },
     addCustomWords(state, words) {
-      state.words = state.words.concat(words);
+      state.customWords = state.customWords.concat(words);
       // console.log(words);
+    },
+    clearCustomWords(state) {
+      state.customWords = [];
     },
     logIn(state) {
       state.loggedIn = true;
@@ -33,6 +38,9 @@ export default createStore({
     },
     showWelcomeOrNot(state) {
       state.showWelcome = !state.showWelcome;
+    },
+    changeWelcomed(state) {
+      state.welcomed = true;
     },
     clearWords(state) {
       state.words = [];
