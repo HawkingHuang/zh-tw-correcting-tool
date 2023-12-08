@@ -23,38 +23,28 @@
           </li>
         </ul>
       </div>
-      <router-view v-slot="slotProps" v-if="showRouterLink">
+      <router-view v-slot="slotProps" v-if="showRouterLink" :key="$route.path">
         <transition name="route-library" mode="out-in" appear>
           <component :is="slotProps.Component"></component>
         </transition>
       </router-view>
-      <div class="library-section" v-if="!showRouterLink">
-        <p v-if="noResult" class="no-result">No Results Found</p>
-        <!-- <ul v-if="!noResult">
-          <li class="word-item-list">
-            <div class="word-item-title">
-              <div class="correct">
-                <ion-icon name="shield-checkmark-outline"></ion-icon>
+      <transition name="route-library-search" mode="out-in">
+        <div class="library-section" v-if="!showRouterLink">
+          <p v-if="noResult" class="no-result">No Results Found</p>
+          <ul>
+            <li
+              v-for="(word, index) in filteredWords"
+              :key="index"
+              class="word-item-list"
+            >
+              <div class="word-item">
+                <div class="correct">{{ word.correct }}</div>
+                <div class="incorrect">{{ word.incorrect }}</div>
               </div>
-              <div class="incorrect">
-                <ion-icon name="close-circle-outline"></ion-icon>
-              </div>
-            </div>
-          </li>
-        </ul> -->
-        <ul>
-          <li
-            v-for="(word, index) in filteredWords"
-            :key="index"
-            class="word-item-list"
-          >
-            <div class="word-item">
-              <div class="correct">{{ word.correct }}</div>
-              <div class="incorrect">{{ word.incorrect }}</div>
-            </div>
-          </li>
-        </ul>
-      </div>
+            </li>
+          </ul>
+        </div>
+      </transition>
     </base-card>
   </div>
 </template>
@@ -257,43 +247,35 @@ a.router-link-active {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-/*.route-library-enter-from,
+.route-library-enter-from,
 .route-library-leave-to {
   opacity: 0;
 }
 
 .route-library-enter-active {
-  transition: opacity 0.3s ease-out;
+  transition: opacity 1.8s ease;
 }
 
 .route-library-leave-active {
-  transition: opacity 0.3s ease-in;
+  transition: opacity 1.8s ease;
 }
 
 .route-library-enter-to,
 .route-library-leave-from {
   opacity: 1;
 }
-@keyframes route-library-enter {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+
+.route-library-search-enter-from,
+.route-library-search-leave-to {
+  opacity: 0;
 }
 
-@keyframes route-library-leave {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
+.route-library-search-enter-active {
+  transition: opacity 0.5s ease;
 }
 
-.route-library-enter-active,
-.route-library-leave-active {
-  animation: route-library-enter 0.3s ease-out, route-library-leave 0.3s ease-in;
-}*/
+.route-library-search-enter-to,
+.route-library-search-leave-from {
+  opacity: 1;
+}
 </style>

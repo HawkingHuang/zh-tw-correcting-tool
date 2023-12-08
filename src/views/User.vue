@@ -19,7 +19,11 @@
             </li>
           </ul>
         </div>
-        <router-view></router-view>
+        <router-view v-slot="slotProps" :key="$route.path">
+          <transition name="route-child" mode="out-in" appear>
+            <component :is="slotProps.Component"></component>
+          </transition>
+        </router-view>
       </div>
     </base-card>
   </div>
@@ -69,7 +73,6 @@ export default {
   gap: 1.6rem;
   list-style: none;
   margin: 1rem auto;
-  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.05);
   border-radius: 5px;
   padding: 1rem;
 }
@@ -80,17 +83,34 @@ export default {
   color: #343a40;
   font-size: 2rem;
   padding: 1rem;
-  border-radius: 5px;
+  border-radius: 20px;
   font-weight: 700;
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-a:active,
-a:hover,
-a.router-link-active {
+.user-section-btn:hover {
   background-color: #fff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.route-child-enter-from,
+.route-child-leave-to {
+  opacity: 0;
+}
+
+.route-child-enter-active {
+  transition: opacity 1.2s ease-out;
+}
+
+.route-child-leave-active {
+  transition: opacity 1.2s ease-in;
+}
+
+.route-child-enter-to,
+.route-child-leave-from {
+  opacity: 1;
 }
 </style>
