@@ -5,7 +5,7 @@
         <h2 class="user-section-title">
           Welcome, {{ $store.state.userEmail.split("@")[0] }}!
         </h2>
-        <div>
+        <div class="user-section-links">
           <ul class="user-section-list">
             <li>
               <router-link :to="wordsLink()" class="user-section-btn"
@@ -33,9 +33,6 @@ export default {
     MyWords,
     MyLogs,
   },
-  // created() {
-  //   console.log("Current Route:", this.$route);
-  // },
   data() {
     return {
       userId: this.$store.state.userEmail.split("@")[0],
@@ -61,18 +58,27 @@ export default {
   font-size: 3rem;
 }
 
+.user-section-links {
+  margin: 2rem 0;
+}
+
 .user-section-list {
+  width: 20%;
   display: flex;
   justify-content: center;
   gap: 1.6rem;
   list-style: none;
-  margin: 1rem 0;
+  margin: 1rem auto;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.05);
+  border-radius: 5px;
+  padding: 1rem;
 }
 
 .user-section-btn:link,
 .user-section-btn:visited {
   text-decoration: none;
   color: #343a40;
+  font-size: 2rem;
   padding: 1rem;
   border-radius: 5px;
   font-weight: 700;

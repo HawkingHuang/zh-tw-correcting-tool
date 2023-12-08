@@ -34,6 +34,9 @@ export default createStore({
     showWelcomeOrNot(state) {
       state.showWelcome = !state.showWelcome;
     },
+    clearWords(state) {
+      state.words = [];
+    },
   },
   actions: {},
   modules: {},

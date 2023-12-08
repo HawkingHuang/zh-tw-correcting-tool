@@ -41,6 +41,7 @@ if (process.env.NODE_ENV === "development") {
 }
 
 // Categorized
+let hasInitialized = false;
 const querySnapshot = await getDocs(collectionGroup(db, "bopomofo"));
 
 const words = [];
@@ -50,24 +51,6 @@ querySnapshot.docs.forEach((doc) => {
 console.log(words);
 
 store.commit("setWords", words);
+hasInitialized = true;
 
-export { db, firebaseApp };
-
-// Users custom words
-// const subCollectionName = this.$store.state.userEmail.split("@")[0];
-
-// const colRef = collection(
-//   db,
-//   "zh-tw-correcting-library-users",
-//   subCollectionName,
-//   "users-custom-words"
-// );
-// const querySnapshotCustom = await getDocs(colRef);
-// querySnapshotCustom.docs.forEach((doc) => {
-//   words.push({ ...doc.data() });
-// });
-
-// store.commit("setWords", words);
-
-// connectFirestoreEmulator(db, "127.0.0.1", 8081);
-// export { db };
+export { db, firebaseApp, hasInitialized };
