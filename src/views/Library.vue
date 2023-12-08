@@ -60,8 +60,6 @@
 </template>
 
 <script>
-import { db } from "../main.js";
-import { getDocs, collection } from "firebase/firestore";
 import Bopomofo from "./Bopomofo.vue";
 export default {
   components: {
@@ -149,7 +147,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .search-bar {
   position: relative;
   display: flex;
@@ -167,7 +165,7 @@ export default {
   height: 3rem;
   font-size: 1.8rem;
   padding: 0.2rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   border: none;
 }
 

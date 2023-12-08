@@ -8,10 +8,12 @@
       "port": 9098
     },
     "firestore": {
-      "port": 8081
+      "port": 8095
     },
     "ui": {
-      "enabled": true
+      "enabled": true,
+      "host": "localhost",
+      "port": 4001
     },
     "singleProjectMode": true
   }

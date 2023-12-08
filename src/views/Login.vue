@@ -92,7 +92,7 @@ form {
 }
 
 .form-control {
-  margin: 1rem 0;
+  margin: 2.4rem 0;
 }
 
 label {
@@ -103,11 +103,11 @@ label {
 }
 
 input {
-  width: 25rem;
   height: 3rem;
-  font-size: 2.4rem;
-  border: 1px solid #ccc;
-  padding: 0.3rem;
+  font-size: 1.8rem;
+  padding: 0.2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  border: none;
   border-radius: 5px;
 }
 

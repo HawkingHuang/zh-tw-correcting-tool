@@ -140,6 +140,17 @@ export default {
 .correct,
 .incorrect {
   padding: 1rem 0;
+  font-weight: 600;
+}
+
+.correct {
+  font-size: 2rem;
+  color: #343a40;
+}
+
+.incorrect {
+  font-size: 2rem;
+  color: #f03e3e;
 }
 
 .word-grid {

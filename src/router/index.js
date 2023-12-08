@@ -8,6 +8,8 @@ import SignUp from "../views/SignUp.vue";
 import Login from "../views/Login.vue";
 import Logout from "../views/Logout.vue";
 import Bopomofo from "../views/Bopomofo.vue";
+import MyWords from "../views/MyWords.vue";
+import MyLogs from "../views/MyLogs.vue";
 
 const routes = [
   {
@@ -42,6 +44,20 @@ const routes = [
     path: "/user",
     name: "user",
     component: User,
+    children: [
+      {
+        name: "mywords",
+        path: "mywords/:userId",
+        component: MyWords,
+        props: true,
+      },
+      {
+        name: "mylogs",
+        path: "mylogs/:userId",
+        component: MyLogs,
+        props: true,
+      },
+    ],
   },
   {
     path: "/signup",

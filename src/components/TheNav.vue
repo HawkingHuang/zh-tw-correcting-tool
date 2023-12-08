@@ -98,6 +98,7 @@ a:active,
 a:hover,
 a.router-link-active {
   background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 ion-icon {
