@@ -14,7 +14,7 @@
             </li>
             <li>
               <router-link :to="logsLink()" class="user-section-btn"
-                >My Logs</router-link
+                >Feedback</router-link
               >
             </li>
           </ul>
@@ -31,7 +31,7 @@
 
 <script>
 import MyWords from "./MyWords.vue";
-import MyLogs from "./MyLogs.vue";
+import MyLogs from "./AddFeedback.vue";
 export default {
   components: {
     MyWords,
@@ -47,7 +47,7 @@ export default {
       return `/user/mywords/${this.userId}`;
     },
     logsLink() {
-      return `/user/mylogs/${this.userId}`;
+      return `/user/add-feedback/${this.userId}`;
     },
   },
 };

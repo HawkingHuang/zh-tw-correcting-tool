@@ -27,6 +27,12 @@
             ><ion-icon name="library-outline"></ion-icon>Library</router-link
           >
         </li>
+        <li>
+          <router-link to="/feedback" class="nav-section-button"
+            ><ion-icon name="chatbox-ellipses-outline"></ion-icon
+            >Feedback</router-link
+          >
+        </li>
       </div>
       <div class="nav-section-list-child">
         <li v-if="$store.state.loggedIn">

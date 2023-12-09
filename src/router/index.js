@@ -3,13 +3,14 @@ import Check from "../views/Check.vue";
 import Custom from "../views/Custom.vue";
 import About from "../views/About.vue";
 import Library from "../views/Library.vue";
+import Feedback from "../views/Feedback.vue";
 import User from "../views/User.vue";
 import SignUp from "../views/SignUp.vue";
 import Login from "../views/Login.vue";
 import Logout from "../views/Logout.vue";
 import Bopomofo from "../views/Bopomofo.vue";
 import MyWords from "../views/MyWords.vue";
-import MyLogs from "../views/MyLogs.vue";
+import AddFeedback from "../views/AddFeedback.vue";
 
 const routes = [
   {
@@ -41,6 +42,11 @@ const routes = [
     ],
   },
   {
+    path: "/feedback",
+    name: "feedback",
+    component: Feedback,
+  },
+  {
     path: "/user",
     name: "user",
     component: User,
@@ -52,9 +58,9 @@ const routes = [
         props: true,
       },
       {
-        name: "mylogs",
-        path: "mylogs/:userId",
-        component: MyLogs,
+        name: "add-feedback",
+        path: "add-feedback/:userId",
+        component: AddFeedback,
         props: true,
       },
     ],

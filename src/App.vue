@@ -10,7 +10,9 @@
     </transition>
     <router-view v-slot="slotProps">
       <transition name="route" mode="out-in">
-        <component :is="slotProps.Component"></component>
+        <keep-alive>
+          <component :is="slotProps.Component"></component>
+        </keep-alive>
       </transition>
     </router-view>
     <the-footer></the-footer>
