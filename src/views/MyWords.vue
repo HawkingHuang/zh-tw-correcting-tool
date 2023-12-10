@@ -17,7 +17,6 @@ import { getDocs, collection } from "firebase/firestore";
 
 export default {
   props: ["userId"],
-  created() {},
   data() {
     return {
       words: [],

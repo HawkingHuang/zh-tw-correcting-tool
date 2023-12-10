@@ -1,16 +1,13 @@
 <template>
-  <nav>
+  <nav class="nav-section">
     <ul class="nav-section-list">
-      <div class="nav-section-list-child">
+      <div class="nav-section-list-child" v-if="!showMenuOrNot">
         <li>
           <router-link to="/" class="nav-section-button"
             ><ion-icon name="checkmark-circle-outline"></ion-icon
             >Check</router-link
           >
         </li>
-        <!-- <li>
-          <router-link to="/" class="nav-section-button">File</router-link>
-        </li> -->
         <li>
           <router-link to="/custom" class="nav-section-button"
             ><ion-icon name="add-circle-outline"></ion-icon>Custom</router-link
@@ -32,6 +29,31 @@
             ><ion-icon name="chatbox-ellipses-outline"></ion-icon
             >Feedback</router-link
           >
+        </li>
+      </div>
+      <!-- Mobile menu -->
+      <div class="nav-section-list-child-m" v-if="showMenuOrNot">
+        <li>
+          <button class="nav-section-button-m" @click="toggleDropdown">
+            <ion-icon name="menu-outline"></ion-icon>
+          </button>
+          <div v-if="isDropdownOpen" class="dropdown-menu">
+            <router-link to="/" class="nav-dropdown-item">
+              <ion-icon name="checkmark-circle-outline"></ion-icon> Check
+            </router-link>
+            <router-link to="/custom" class="nav-dropdown-item">
+              <ion-icon name="add-circle-outline"></ion-icon> Custom
+            </router-link>
+            <router-link to="/about" class="nav-dropdown-item">
+              <ion-icon name="information-circle-outline"></ion-icon> About
+            </router-link>
+            <router-link to="/library" class="nav-dropdown-item">
+              <ion-icon name="library-outline"></ion-icon> Library
+            </router-link>
+            <router-link to="/feedback" class="nav-dropdown-item">
+              <ion-icon name="chatbox-ellipses-outline"></ion-icon> Feedback
+            </router-link>
+          </div>
         </li>
       </div>
       <div class="nav-section-list-child">
@@ -62,7 +84,23 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      isDropdownOpen: false,
+    };
+  },
+  methods: {
+    toggleDropdown() {
+      this.isDropdownOpen = !this.isDropdownOpen;
+    },
+  },
+  computed: {
+    showMenuOrNot() {
+      return window.innerWidth < 1184;
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -95,11 +133,6 @@ export default {};
   gap: 0.5rem;
 }
 
-/*.nav-section-button:hover,
-.nav-section-button:active {
-  color: #3b5bdb;
-}*/
-
 a:active,
 a:hover,
 a.router-link-active {
@@ -110,5 +143,50 @@ a.router-link-active {
 ion-icon {
   font-size: 2.4rem;
   color: black;
+}
+
+/* Mobile */
+.nav-section-list-child-m li {
+  position: relative;
+}
+
+.nav-section-button-m {
+  color: #343a40;
+  padding: 1rem;
+  border-radius: 5px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  border: none;
+}
+
+.dropdown-menu {
+  padding: 1rem;
+  display: grid;
+  grid-auto-columns: 1fr;
+  justify-items: left;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+}
+
+.nav-dropdown-item {
+  text-decoration: none;
+  color: #343a40;
+  padding: 1rem;
+  border-radius: 5px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 </style>

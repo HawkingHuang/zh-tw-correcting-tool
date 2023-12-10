@@ -14,14 +14,8 @@
 </template>
 
 <script>
-import {
-  getFirestore,
-  collection,
-  getDocs,
-  query,
-  doc,
-  getDoc,
-} from "firebase/firestore";
+import { db } from "../main.js";
+import { collection, getDocs, query, doc, getDoc } from "firebase/firestore";
 
 export default {
   props: ["bopomofoId"],
@@ -33,39 +27,15 @@ export default {
     };
   },
   computed: {
-    // filteredWords() {
-    //   return this.words.filter((word) => {
-    //     const searchString = this.searchTerm;
-    //     return (
-    //       word.correct.includes(searchString) ||
-    //       word.incorrect.includes(searchString)
-    //     );
-    //   });
-    // },
     noResult() {
       return this.words.length === 0;
     },
   },
   methods: {
-    // async fetchWords(bopomofoId) {
-    //   const db = getFirestore();
-    //   const fileRef = doc(db, "zh-tw-correcting-library", bopomofoId);
-    //   const subCollectionRef = collection(fileRef, "bopomofo");
-
-    //   const q = query(subCollectionRef);
-    //   const querySnapshot = await getDocs(q);
-
-    //   this.words = [];
-    //   querySnapshot.forEach((doc) => {
-    //     this.words.push(doc.data());
-    //   });
-    //   console.log(this.words);
-    // },
     async fetchWords(bopomofoId) {
       try {
         this.loading = true;
 
-        const db = getFirestore();
         const fileRef = doc(
           db,
           "zh-tw-correcting-library-categorized",
