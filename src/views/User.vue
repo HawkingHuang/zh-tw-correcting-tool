@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import MyWords from "./MyWords.vue";
 import MyLogs from "./AddFeedback.vue";
 export default {
@@ -41,6 +42,23 @@ export default {
     return {
       userId: this.$store.state.userEmail.split("@")[0],
     };
+  },
+  mounted() {
+    const auth = getAuth();
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        this.$store.commit("logIn");
+        this.$store.commit("setUserEmail", user.email);
+        this.$store.commit("showWelcomeOrNot");
+        setTimeout(() => {
+          this.$store.commit("showWelcomeOrNot");
+        }, 3000);
+        this.userId = this.$store.state.userEmail.split("@")[0];
+      } else {
+        this.$store.commit("logOut");
+      }
+    });
   },
   methods: {
     wordsLink() {

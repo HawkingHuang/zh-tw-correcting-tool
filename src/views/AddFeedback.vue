@@ -24,7 +24,7 @@
         </div>
       </div>
       <button @click.prevent="submitForm" class="btn">
-        <ion-icon name="add-outline"></ion-icon>
+        <ion-icon name="arrow-up-outline"></ion-icon>
       </button>
     </form>
   </div>
@@ -93,7 +93,7 @@ export default {
 
 textarea {
   width: 90%;
-  height: 50rem;
+  height: 20rem;
   border: 3px solid #ced4da;
   border-radius: 10px;
   resize: none;
