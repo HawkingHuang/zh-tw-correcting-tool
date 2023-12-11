@@ -241,6 +241,10 @@ ion-icon {
   border-radius: 5px;
 }
 
+ion-icon {
+  color: #868e96;
+}
+
 a:active,
 a:hover,
 a.router-link-active {

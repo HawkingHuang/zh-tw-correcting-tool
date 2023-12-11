@@ -120,6 +120,7 @@ export default {
     },
     handleResize() {
       this.windowWidth = window.innerWidth;
+      this.showMenuOrNot = this.windowWidth < 1184;
     },
     closeDropdown() {
       this.isDropdownOpen = false;
@@ -130,8 +131,12 @@ export default {
       this.showMenuOrNot = newWidth < 1184;
     },
   },
-  mounted() {
+  created() {
+    this.handleResize();
     window.addEventListener("resize", this.handleResize);
+  },
+  mounted() {
+    this.showMenuOrNot = this.windowWidth < 1184;
   },
   beforeDestroy() {
     window.removeEventListener("resize", this.handleResize);

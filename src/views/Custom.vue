@@ -128,14 +128,15 @@ input {
 }
 
 .btn {
-  width: 6rem;
-  height: 2.4rem;
   padding: 0.2rem;
   margin: 4rem auto;
-  font-size: medium;
+  width: 6rem;
+  height: 2.4rem;
   background-color: #fff;
   border-radius: 15px;
   cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 ion-icon {

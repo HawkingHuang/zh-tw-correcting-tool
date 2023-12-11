@@ -72,11 +72,11 @@ export default {
 .btn {
   width: 6rem;
   height: 2.4rem;
-  font-size: medium;
   background-color: #fff;
-  color: #f8f9fa;
   border-radius: 15px;
   cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 ion-icon {

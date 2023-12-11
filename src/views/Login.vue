@@ -119,12 +119,12 @@ input:focus {
 
 button {
   width: 6rem;
-  padding: 0.2rem;
-  margin: 2rem auto;
-  font-size: medium;
+  height: 2.4rem;
   background-color: #fff;
   border-radius: 15px;
   cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .flex {

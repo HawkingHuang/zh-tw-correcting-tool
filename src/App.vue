@@ -64,9 +64,9 @@ html {
 .welcome-box {
   position: absolute;
   font-size: 1.6rem;
-  top: 2rem;
-  right: 2rem;
-  background-color: black;
+  top: 16rem;
+  right: 0.2rem;
+  background-color: #40c057;
   color: white;
   padding: 1rem;
   border-radius: 10px;
