@@ -37,23 +37,45 @@
           <button class="nav-section-button-m" @click="toggleDropdown">
             <ion-icon name="menu-outline"></ion-icon>
           </button>
-          <div v-if="isDropdownOpen" class="dropdown-menu">
-            <router-link to="/" class="nav-dropdown-item">
-              <ion-icon name="checkmark-circle-outline"></ion-icon> Check
-            </router-link>
-            <router-link to="/custom" class="nav-dropdown-item">
-              <ion-icon name="add-circle-outline"></ion-icon> Custom
-            </router-link>
-            <router-link to="/about" class="nav-dropdown-item">
-              <ion-icon name="information-circle-outline"></ion-icon> About
-            </router-link>
-            <router-link to="/library" class="nav-dropdown-item">
-              <ion-icon name="library-outline"></ion-icon> Library
-            </router-link>
-            <router-link to="/feedback" class="nav-dropdown-item">
-              <ion-icon name="chatbox-ellipses-outline"></ion-icon> Feedback
-            </router-link>
-          </div>
+          <transition name="dropdown-menu">
+            <div v-if="isDropdownOpen" class="dropdown-menu">
+              <router-link
+                to="/"
+                class="nav-dropdown-item"
+                @click="closeDropdown"
+              >
+                <ion-icon name="checkmark-circle-outline"></ion-icon> Check
+              </router-link>
+              <router-link
+                to="/custom"
+                class="nav-dropdown-item"
+                @click="closeDropdown"
+              >
+                <ion-icon name="add-circle-outline"></ion-icon> Custom
+              </router-link>
+              <router-link
+                to="/about"
+                class="nav-dropdown-item"
+                @click="closeDropdown"
+              >
+                <ion-icon name="information-circle-outline"></ion-icon> About
+              </router-link>
+              <router-link
+                to="/library"
+                class="nav-dropdown-item"
+                @click="closeDropdown"
+              >
+                <ion-icon name="library-outline"></ion-icon> Library
+              </router-link>
+              <router-link
+                to="/feedback"
+                class="nav-dropdown-item"
+                @click="closeDropdown"
+              >
+                <ion-icon name="chatbox-ellipses-outline"></ion-icon> Feedback
+              </router-link>
+            </div>
+          </transition>
         </li>
       </div>
       <div class="nav-section-list-child">
@@ -88,17 +110,31 @@ export default {
   data() {
     return {
       isDropdownOpen: false,
+      showMenuOrNot: false,
+      windowWidth: window.innerWidth,
     };
   },
   methods: {
     toggleDropdown() {
       this.isDropdownOpen = !this.isDropdownOpen;
     },
-  },
-  computed: {
-    showMenuOrNot() {
-      return window.innerWidth < 1184;
+    handleResize() {
+      this.windowWidth = window.innerWidth;
     },
+    closeDropdown() {
+      this.isDropdownOpen = false;
+    },
+  },
+  watch: {
+    windowWidth(newWidth) {
+      this.showMenuOrNot = newWidth < 1184;
+    },
+  },
+  mounted() {
+    window.addEventListener("resize", this.handleResize);
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.handleResize);
   },
 };
 </script>
@@ -161,6 +197,7 @@ ion-icon {
   background-color: white;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   border: none;
+  cursor: pointer;
 }
 
 .dropdown-menu {
@@ -188,5 +225,38 @@ ion-icon {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+}
+
+.dropdown-menu-enter-from,
+.dropdown-menu-leave-to {
+  opacity: 0;
+}
+
+.dropdown-menu-enter-active {
+  transition: opacity 0.4s ease-out;
+}
+
+.dropdown-menu-leave-active {
+  transition: opacity 0.4s ease-in;
+}
+
+.dropdown-menu-enter-to,
+.dropdown-menu-leave-from {
+  opacity: 1;
+}
+
+/* 768px */
+@media (max-width: 48em) {
+}
+
+/* 640px */
+@media (max-width: 40em) {
+  .nav-section-list {
+    padding: 1rem 1.5rem;
+  }
+
+  .nav-section-list-child {
+    gap: 0;
+  }
 }
 </style>

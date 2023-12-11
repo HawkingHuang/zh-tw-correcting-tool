@@ -142,4 +142,13 @@ ion-icon {
   font-size: 1.8rem;
   color: black;
 }
+
+/* 768px */
+@media (max-width: 48em) {
+  .custom-flex {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+}
 </style>

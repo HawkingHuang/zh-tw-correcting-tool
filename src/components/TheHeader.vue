@@ -14,4 +14,11 @@ h1 {
   margin: 2rem 2rem 0;
   padding: 1rem;
 }
+
+/* 768px */
+@media (max-width: 48em) {
+  h1 {
+    font-size: 3.6rem;
+  }
+}
 </style>

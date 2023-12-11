@@ -127,4 +127,32 @@ export default {
   grid-template-columns: repeat(8, 1fr);
   row-gap: 1rem;
 }
+
+/* 1024px */
+@media (max-width: 64em) {
+  .word-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+/* 768px */
+@media (max-width: 48em) {
+  .word-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* 640px */
+@media (max-width: 40em) {
+  .word-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* 480px */
+@media (max-width: 30em) {
+  .word-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 </style>

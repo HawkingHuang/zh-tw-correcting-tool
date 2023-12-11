@@ -10,8 +10,8 @@
             and so on.
           </p>
           <p>
-            Simply copy and paste content into the checking area and see if our
-            tool has detected any incorrect words.
+            Simply copy and paste content into the <strong>Check</strong> area
+            and see if our tool has detected any incorrect words.
           </p>
           <p>
             You can click <strong>Custom</strong> and add custom words you like
@@ -20,6 +20,14 @@
           <p>
             Besides, you can go to <strong>Library</strong> to view the words
             within the scope.
+          </p>
+          <p>
+            Also, you can direct to <strong>Feedback</strong> to see what other
+            users have to say.
+          </p>
+          <p>
+            If you want to leave yours, please log in, click your personal own
+            page, and then click <strong>+ Feedback</strong> to add one.
           </p>
         </div>
       </div>
@@ -43,7 +51,7 @@ export default {};
 .about-section-para {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 3rem;
   font-size: 2rem;
   margin-top: 2rem;
 }

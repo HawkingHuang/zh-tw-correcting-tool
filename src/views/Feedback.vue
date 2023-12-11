@@ -88,4 +88,11 @@ export default {
   font-size: 2rem;
   text-align: center;
 }
+
+/* 768px */
+@media (max-width: 48em) {
+  .feedback-list {
+    margin: 3rem 1rem;
+  }
+}
 </style>

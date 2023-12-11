@@ -14,7 +14,7 @@
             </li>
             <li>
               <router-link :to="logsLink()" class="user-section-btn"
-                >Feedback</router-link
+                >+ Feedback</router-link
               >
             </li>
           </ul>

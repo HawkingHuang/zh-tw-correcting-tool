@@ -197,4 +197,44 @@ ion-icon {
   font-size: 1.8rem;
   color: black;
 }
+
+/* 1024px */
+@media (max-width: 64em) {
+  .text-input-section {
+    grid-template-columns: 1fr;
+    margin: 1.5rem auto;
+  }
+}
+
+/* 768px */
+@media (max-width: 48em) {
+  textarea,
+  .result-text {
+    width: 90%;
+    height: 25rem;
+  }
+
+  .button-section {
+    max-width: 8rem;
+    margin: 2rem auto;
+    row-gap: 1.6rem;
+  }
+
+  .btn {
+    width: 8rem;
+    height: 3.2rem;
+  }
+  ion-icon {
+    font-size: 2.4rem;
+  }
+}
+
+/* 480px */
+@media (max-width: 30em) {
+  textarea,
+  .result-text {
+    width: 90%;
+    height: 15rem;
+  }
+}
 </style>
