@@ -8,20 +8,40 @@
               <ion-icon name="mail-outline" class="icon"></ion-icon>
               <label for="email">Email</label>
             </div>
-            <input type="email" id="email" v-model="email" />
-            <!-- <p class="hint">Invalid Email</p> -->
+            <input
+              type="email"
+              id="email"
+              v-model="email"
+              @keyup="validateEmail"
+            />
+            <p class="warning" :class="{ 'warning-visibility': !isEmailValid }">
+              Invalid Email Format
+            </p>
           </div>
           <div class="form-control">
             <div class="flex">
               <ion-icon name="key-outline" class="icon"></ion-icon>
               <label for="password">Password</label>
             </div>
-            <input type="password" id="password" v-model="password" />
-            <!-- <p class="hint">Invalid Password</p> -->
+            <input
+              type="password"
+              id="password"
+              v-model="password"
+              @keyup="validatePassword"
+            />
+            <p
+              class="warning"
+              :class="{ 'warning-visibility': !isPasswordValid }"
+            >
+              Please enter 6-20 alphanumeric characters
+            </p>
           </div>
           <button type="submit">
             <ion-icon name="log-in-outline"></ion-icon>
           </button>
+          <p class="warning" :class="{ 'warning-visibility': !isDataValid }">
+            Please fill up both fields in correct format
+          </p>
         </form>
       </div>
     </base-card>
@@ -40,6 +60,9 @@ export default {
     return {
       email: "",
       password: "",
+      isEmailValid: true,
+      isPasswordValid: true,
+      isDataValid: true,
     };
   },
   mounted() {
@@ -60,26 +83,42 @@ export default {
   },
   methods: {
     async login() {
-      const auth = getAuth();
+      if (this.isEmailValid && this.isPasswordValid) {
+        const auth = getAuth();
 
-      try {
-        const userCredential = await signInWithEmailAndPassword(
-          auth,
-          this.email,
-          this.password
-        );
-        const user = userCredential.user;
-        console.log("User logged in:", user);
-        this.$router.push("/");
-        // this.$store.commit("LogIn");
-        // this.$store.commit("setUserEmail", user.email);
-        // this.$store.commit("showWelcomeOrNot");
-        // setTimeout(() => {
-        //   this.$store.commit("showWelcomeOrNot");
-        // }, 3000);
-      } catch (error) {
-        console.error("Registration error:", error.message);
+        try {
+          const userCredential = await signInWithEmailAndPassword(
+            auth,
+            this.email,
+            this.password
+          );
+          const user = userCredential.user;
+          console.log("User logged in:", user);
+          this.$router.push("/");
+          this.$store.commit("LogIn");
+          this.$store.commit("setUserEmail", user.email);
+          this.$store.commit("showWelcomeOrNot");
+          setTimeout(() => {
+            this.$store.commit("showWelcomeOrNot");
+          }, 3000);
+        } catch (error) {
+          console.error("Registration error:", error.message);
+        }
+      } else {
+        this.isDataValid = false;
+        setTimeout(() => {
+          this.isDataValid = !this.isDataValid;
+        }, 3000);
       }
+    },
+    validateEmail() {
+      const emailRegex =
+        /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/;
+      this.isEmailValid = emailRegex.test(this.email);
+    },
+    validatePassword() {
+      const passwordRegex = /^[\d\w]{6,20}$/i;
+      this.isPasswordValid = passwordRegex.test(this.password);
     },
   },
 };
@@ -134,14 +173,21 @@ button {
   gap: 0.5rem;
 }
 
+.warning {
+  color: #fa5252;
+  margin: 0.5rem auto;
+  padding: 0.2rem;
+  font-size: 1.6rem;
+  visibility: hidden;
+  font-weight: 700;
+}
+
+.warning-visibility {
+  visibility: visible;
+}
+
 ion-icon {
   font-size: 1.4rem;
   color: black;
-}
-
-.hint {
-  color: orange;
-  font-size: 1.2rem;
-  margin: 0.5rem;
 }
 </style>

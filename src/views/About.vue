@@ -26,8 +26,9 @@
             users have to say.
           </p>
           <p>
-            If you want to leave yours, please log in, click your personal own
-            page, and then click <strong>+ Feedback</strong> to add one.
+            If you want to leave your comment, please log in, click your
+            personal own page, and then click <strong>+ Feedback</strong> to add
+            one.
           </p>
         </div>
       </div>

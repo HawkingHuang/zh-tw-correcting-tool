@@ -6,6 +6,7 @@
         <div class="title-section">
           <input
             v-model="formData.title"
+            @input="clearWarning"
             class="title"
             type="text"
             name="title"
@@ -16,6 +17,7 @@
         <div class="text-section">
           <textarea
             v-model="formData.text"
+            @input="clearWarning"
             id="feedback"
             placeholder="Enter your feedback..."
             class="textarea"
@@ -23,6 +25,11 @@
           ></textarea>
         </div>
       </div>
+      <transition name="warning">
+        <p class="warning" v-show="showWarning">
+          Title and text area must not be empty!
+        </p>
+      </transition>
       <button @click.prevent="submitForm" class="btn">
         <ion-icon name="arrow-up-outline"></ion-icon>
       </button>
@@ -42,6 +49,7 @@ export default {
         title: "",
         text: "",
       },
+      showWarning: false,
     };
   },
   created() {
@@ -52,14 +60,21 @@ export default {
       // const subCollectionName = this.$store.state.userEmail.split("@")[0];
       const colRef = collection(db, "zh-tw-correcting-library-feedback");
 
-      try {
-        await addDoc(colRef, this.formData);
-        console.log("Document added successfully!");
-        this.formData.title = "";
-        this.formData.text = "";
-      } catch (error) {
-        console.error("Error adding document: ", error);
+      if (this.formData.title !== "" && this.formData.text !== "") {
+        try {
+          await addDoc(colRef, this.formData);
+          console.log("Document added successfully!");
+          this.formData.title = "";
+          this.formData.text = "";
+        } catch (error) {
+          console.error("Error adding document: ", error);
+        }
+      } else {
+        this.showWarning = true;
       }
+    },
+    clearWarning() {
+      this.showWarning = false;
     },
   },
 };
@@ -114,5 +129,41 @@ textarea {
 
 .textarea::-webkit-scrollbar-track {
   background-color: #f1f3f5;
+}
+
+.warning {
+  width: 40rem;
+  color: #f59f00;
+  margin: 1rem auto;
+  padding: 1rem;
+  font-size: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  border: none;
+  border-radius: 5px;
+}
+
+.warning-enter-from,
+.warning-leave-to {
+  opacity: 0;
+}
+
+.warning-enter-active {
+  transition: opacity 0.3s ease-out;
+}
+
+.warning-leave-active {
+  transition: opacity 0.3s ease-in;
+}
+
+.warning-enter-to,
+.warning-leave-from {
+  opacity: 1;
+}
+
+/* 640px */
+@media (max-width: 40em) {
+  .warning {
+    width: 20rem;
+  }
 }
 </style>

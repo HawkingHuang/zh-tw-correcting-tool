@@ -9,6 +9,7 @@
               <!-- <label for="correct">Correct</label> -->
               <input
                 v-model="formData.correct"
+                @input="clearWarning"
                 type="text"
                 name="correct"
                 placeholder="Enter a CORRECT word"
@@ -19,6 +20,7 @@
               <!-- <label for="incorrect">Incorrect</label> -->
               <input
                 v-model="formData.incorrect"
+                @input="clearWarning"
                 type="text"
                 name="incorrect"
                 placeholder="Enter a INCORRECT word"
@@ -26,6 +28,11 @@
               />
             </div>
           </div>
+          <transition name="warning">
+            <p class="warning" v-show="showWarning">
+              Both fields must not be empty!
+            </p>
+          </transition>
           <button @click.prevent="submitForm" class="btn">
             <ion-icon name="add-outline"></ion-icon>
           </button>
@@ -46,6 +53,7 @@ export default {
         correct: "",
         incorrect: "",
       },
+      showWarning: false,
     };
   },
   methods: {
@@ -78,14 +86,21 @@ export default {
         "users-custom-words"
       );
 
-      try {
-        await addDoc(colRef, this.formData);
-        console.log("Document added successfully!");
-        this.formData.correct = "";
-        this.formData.incorrect = "";
-      } catch (error) {
-        console.error("Error adding document: ", error);
+      if (this.formData.correct !== "" && this.formData.incorrect !== "") {
+        try {
+          await addDoc(colRef, this.formData);
+          console.log("Document added successfully!");
+          this.formData.correct = "";
+          this.formData.incorrect = "";
+        } catch (error) {
+          console.error("Error adding document: ", error);
+        }
+      } else {
+        this.showWarning = true;
       }
+    },
+    clearWarning() {
+      this.showWarning = false;
     },
   },
 };
@@ -142,6 +157,42 @@ input {
 ion-icon {
   font-size: 1.8rem;
   color: black;
+}
+
+.warning {
+  width: 40rem;
+  color: #f59f00;
+  margin: 1rem auto;
+  padding: 1rem;
+  font-size: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  border: none;
+  border-radius: 5px;
+}
+
+.warning-enter-from,
+.warning-leave-to {
+  opacity: 0;
+}
+
+.warning-enter-active {
+  transition: opacity 0.3s ease-out;
+}
+
+.warning-leave-active {
+  transition: opacity 0.3s ease-in;
+}
+
+.warning-enter-to,
+.warning-leave-from {
+  opacity: 1;
+}
+
+/* 640px */
+@media (max-width: 40em) {
+  .warning {
+    width: 20rem;
+  }
 }
 
 /* 768px */
