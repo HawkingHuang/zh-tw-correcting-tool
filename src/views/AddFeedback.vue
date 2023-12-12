@@ -25,14 +25,20 @@
           ></textarea>
         </div>
       </div>
-      <transition name="warning">
-        <p class="warning" v-show="showWarning">
-          Title and text area must not be empty!
-        </p>
-      </transition>
+      <p
+        class="warning"
+        :class="{
+          'warning-visibility': showWarning,
+        }"
+      >
+        Title and text area must not be empty!
+      </p>
       <button @click.prevent="submitForm" class="btn">
         <ion-icon name="arrow-up-outline"></ion-icon>
       </button>
+      <p class="success" :class="{ 'success-visibility': showSuccess }">
+        Feedback added successfully!
+      </p>
     </form>
   </div>
 </template>
@@ -50,6 +56,7 @@ export default {
         text: "",
       },
       showWarning: false,
+      showSuccess: false,
     };
   },
   created() {
@@ -57,7 +64,6 @@ export default {
   },
   methods: {
     async submitForm() {
-      // const subCollectionName = this.$store.state.userEmail.split("@")[0];
       const colRef = collection(db, "zh-tw-correcting-library-feedback");
 
       if (this.formData.title !== "" && this.formData.text !== "") {
@@ -66,6 +72,10 @@ export default {
           console.log("Document added successfully!");
           this.formData.title = "";
           this.formData.text = "";
+          this.showSuccess = true;
+          setTimeout(() => {
+            this.showSuccess = false;
+          }, 5000);
         } catch (error) {
           console.error("Error adding document: ", error);
         }
@@ -131,39 +141,34 @@ textarea {
   background-color: #f1f3f5;
 }
 
+ion-icon {
+  font-size: 1.8rem;
+  color: #212529;
+}
+
 .warning {
-  width: 40rem;
-  color: #f59f00;
+  color: #fa5252;
   margin: 1rem auto;
-  padding: 1rem;
-  font-size: 2rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  border: none;
-  border-radius: 5px;
+  padding: 0.2rem;
+  font-size: 1.6rem;
+  visibility: hidden;
+  font-weight: 700;
 }
 
-.warning-enter-from,
-.warning-leave-to {
-  opacity: 0;
+.warning-visibility {
+  visibility: visible;
 }
 
-.warning-enter-active {
-  transition: opacity 0.3s ease-out;
+.success {
+  color: #40c057;
+  margin: 1rem auto;
+  padding: 0.2rem;
+  font-size: 1.6rem;
+  visibility: hidden;
+  font-weight: 700;
 }
 
-.warning-leave-active {
-  transition: opacity 0.3s ease-in;
-}
-
-.warning-enter-to,
-.warning-leave-from {
-  opacity: 1;
-}
-
-/* 640px */
-@media (max-width: 40em) {
-  .warning {
-    width: 20rem;
-  }
+.success-visibility {
+  visibility: visible;
 }
 </style>

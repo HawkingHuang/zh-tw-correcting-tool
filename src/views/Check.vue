@@ -195,7 +195,7 @@ textarea,
 
 ion-icon {
   font-size: 1.8rem;
-  color: black;
+  color: #212529;
 }
 
 /* 1024px */
