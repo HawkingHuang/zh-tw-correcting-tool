@@ -51,6 +51,8 @@
 
 <script>
 import Bopomofo from "./Bopomofo.vue";
+import { db } from "../main.js";
+import { getDocs, collection } from "firebase/firestore";
 export default {
   components: {
     Bopomofo,
@@ -133,6 +135,30 @@ export default {
     emptyField() {
       this.searchTerm = "";
     },
+    async fetchCustomWords() {
+      // Users custom words
+      const subCollectionName = this.$store.state.userEmail.split("@")[0];
+
+      const colRef = collection(
+        db,
+        "zh-tw-correcting-library-users",
+        subCollectionName,
+        "users-custom-words"
+      );
+
+      const words = [];
+      const querySnapshotCustom = await getDocs(colRef);
+      querySnapshotCustom.docs.forEach((doc) => {
+        words.push({ ...doc.data() });
+        console.log(words);
+      });
+
+      this.$store.commit("clearCustomWords");
+      this.$store.commit("addCustomWords", words);
+    },
+  },
+  activated() {
+    this.fetchCustomWords();
   },
 };
 </script>

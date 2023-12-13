@@ -36,6 +36,14 @@
           >
             Both fields must not be empty!
           </p>
+          <p
+            class="warning"
+            :class="{
+              'warning-visibility': !allowAdding,
+            }"
+          >
+            Log in to add custom words!
+          </p>
           <button @click.prevent="submitForm" class="btn">
             <ion-icon name="arrow-up-outline"></ion-icon>
           </button>
@@ -61,11 +69,12 @@ export default {
       },
       showWarning: false,
       showSuccess: false,
+      allowAdding: true,
     };
   },
   methods: {
     async submitForm() {
-      // For adding central database
+      // For adding central database (do not delete)
       // const subCollectionName = "bopomofo-31";
 
       // const colRef = collection(
@@ -85,29 +94,35 @@ export default {
       // }
       // For adding indivisual database
       const subCollectionName = this.$store.state.userEmail.split("@")[0];
-
-      const colRef = collection(
-        db,
-        "zh-tw-correcting-library-users",
-        subCollectionName,
-        "users-custom-words"
-      );
-
-      if (this.formData.correct !== "" && this.formData.incorrect !== "") {
-        try {
-          await addDoc(colRef, this.formData);
-          console.log("Document added successfully!");
-          this.formData.correct = "";
-          this.formData.incorrect = "";
-          this.showSuccess = true;
-          setTimeout(() => {
-            this.showSuccess = false;
-          }, 5000);
-        } catch (error) {
-          console.error("Error adding document: ", error);
-        }
+      if (subCollectionName === "") {
+        this.allowAdding = false;
+        setTimeout(() => {
+          this.allowAdding = true;
+        }, 5000);
       } else {
-        this.showWarning = true;
+        const colRef = collection(
+          db,
+          "zh-tw-correcting-library-users",
+          subCollectionName,
+          "users-custom-words"
+        );
+
+        if (this.formData.correct !== "" && this.formData.incorrect !== "") {
+          try {
+            await addDoc(colRef, this.formData);
+            console.log("Document added successfully!");
+            this.formData.correct = "";
+            this.formData.incorrect = "";
+            this.showSuccess = true;
+            setTimeout(() => {
+              this.showSuccess = false;
+            }, 5000);
+          } catch (error) {
+            console.error("Error adding document: ", error);
+          }
+        } else {
+          this.showWarning = true;
+        }
       }
     },
     clearWarning() {

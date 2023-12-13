@@ -79,10 +79,11 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .word-item-list {
   list-style-type: none;
   cursor: pointer;
+  position: relative;
 }
 
 .word-item-title {
@@ -120,6 +121,11 @@ export default {
 }
 
 .btn {
+  position: absolute;
+  top: 26%;
+  left: 85%;
+  width: 3rem;
+  height: 2.4rem;
   background-color: #fff;
   border-radius: 15px;
   cursor: pointer;
@@ -132,10 +138,24 @@ ion-icon {
   color: #212529;
 }
 
+/* 1200px */
+@media (max-width: 75em) {
+  .word-grid {
+    grid-template-columns: repeat(7, 1fr);
+  }
+}
+
 /* 1024px */
 @media (max-width: 64em) {
   .word-grid {
     grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+/* 928px */
+@media (max-width: 58em) {
+  .word-grid {
+    grid-template-columns: repeat(5, 1fr);
   }
 }
 

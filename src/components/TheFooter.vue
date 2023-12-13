@@ -1,7 +1,5 @@
 <template>
-  <div class="footer">
-    Copyright &copy; 2023 HH TW, Inc. All rights reserved.
-  </div>
+  <div class="footer">&copy; 2023 HH TW, Inc. All rights reserved.</div>
 </template>
 
 <style scoped>
