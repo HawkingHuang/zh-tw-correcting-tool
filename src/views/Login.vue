@@ -40,7 +40,7 @@
             <ion-icon name="log-in-outline"></ion-icon>
           </button>
           <p class="warning" :class="{ 'warning-visibility': !isDataValid }">
-            Please fill up both fields in correct format
+            Incorrect email or password!
           </p>
         </form>
       </div>
@@ -102,13 +102,14 @@ export default {
             this.$store.commit("showWelcomeOrNot");
           }, 3000);
         } catch (error) {
-          console.error("Registration error:", error.message);
+          console.error("Login error:", error.message);
+          if (error.message.includes("auth/invalid-login-credentials")) {
+            this.isDataValid = false;
+            setTimeout(() => {
+              this.isDataValid = !this.isDataValid;
+            }, 3000);
+          }
         }
-      } else {
-        this.isDataValid = false;
-        setTimeout(() => {
-          this.isDataValid = !this.isDataValid;
-        }, 3000);
       }
     },
     validateEmail() {

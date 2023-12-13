@@ -21,6 +21,7 @@
 
 <script>
 import { db } from "../main.js";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getDocs, collection, deleteDoc, doc } from "firebase/firestore";
 
 export default {
@@ -74,7 +75,17 @@ export default {
     },
   },
   mounted() {
-    this.fetchCustomWords();
+    const auth = getAuth();
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        this.$store.commit("logIn");
+        this.$store.commit("setUserEmail", user.email);
+        this.fetchCustomWords();
+      } else {
+        this.$store.commit("logOut");
+      }
+    });
   },
 };
 </script>
