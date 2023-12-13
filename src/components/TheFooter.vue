@@ -5,7 +5,7 @@
 <style scoped>
 .footer {
   color: #343a40;
-  padding: 0.5rem;
+  padding: 0.3rem;
 }
 
 /* 768px */

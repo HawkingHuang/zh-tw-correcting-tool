@@ -138,23 +138,26 @@ export default {
     async fetchCustomWords() {
       // Users custom words
       const subCollectionName = this.$store.state.userEmail.split("@")[0];
+      if (subCollectionName === "") {
+        console.log("No custom words to fetch because users didn't log in");
+      } else {
+        const colRef = collection(
+          db,
+          "zh-tw-correcting-library-users",
+          subCollectionName,
+          "users-custom-words"
+        );
 
-      const colRef = collection(
-        db,
-        "zh-tw-correcting-library-users",
-        subCollectionName,
-        "users-custom-words"
-      );
+        const words = [];
+        const querySnapshotCustom = await getDocs(colRef);
+        querySnapshotCustom.docs.forEach((doc) => {
+          words.push({ ...doc.data() });
+          console.log(words);
+        });
 
-      const words = [];
-      const querySnapshotCustom = await getDocs(colRef);
-      querySnapshotCustom.docs.forEach((doc) => {
-        words.push({ ...doc.data() });
-        console.log(words);
-      });
-
-      this.$store.commit("clearCustomWords");
-      this.$store.commit("addCustomWords", words);
+        this.$store.commit("clearCustomWords");
+        this.$store.commit("addCustomWords", words);
+      }
     },
   },
   activated() {
