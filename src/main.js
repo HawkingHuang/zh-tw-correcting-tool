@@ -2,8 +2,8 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
-
 import BaseCard from "./components/BaseCard.vue";
+
 const vueApp = createApp(App);
 
 vueApp.use(router);

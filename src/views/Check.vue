@@ -149,7 +149,8 @@ textarea,
   border-radius: 10px;
   resize: none;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  font-size: large;
+  font-size: 2rem;
+  color: #212529;
   padding: 0.5rem;
   overflow: auto;
 }
@@ -173,6 +174,7 @@ textarea,
 .result-text {
   text-align: left;
   margin: auto;
+  white-space: pre-line;
 }
 
 .button-section {
