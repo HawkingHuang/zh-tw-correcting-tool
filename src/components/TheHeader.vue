@@ -13,6 +13,7 @@ h1 {
   font-size: 4.4rem;
   margin: 1.6rem 2rem 0;
   padding: 1rem;
+  color: #212529;
 }
 
 /* 768px */

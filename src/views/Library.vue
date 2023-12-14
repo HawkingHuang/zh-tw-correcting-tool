@@ -265,7 +265,8 @@ ion-icon {
 .router-btn {
   text-decoration: none;
   font-size: 2rem;
-  color: black;
+  font-weight: 600;
+  color: #212529;
   padding: 0.5rem;
   border-radius: 5px;
 }

@@ -1,7 +1,7 @@
 <template>
   <nav class="nav-section">
-    <ul class="nav-section-list">
-      <div class="nav-section-list-child" v-if="!showMenuOrNot">
+    <ul class="nav-section-lists">
+      <div class="nav-section-lists-section" v-if="!showMenuOrNot">
         <li>
           <router-link to="/" class="nav-section-button"
             ><ion-icon name="checkmark-circle-outline"></ion-icon
@@ -32,7 +32,7 @@
         </li>
       </div>
       <!-- Mobile menu -->
-      <div class="nav-section-list-child-m" v-if="showMenuOrNot">
+      <div class="nav-section-lists-section-m" v-if="showMenuOrNot">
         <li>
           <button class="nav-section-button-m" @click="toggleDropdown">
             <ion-icon name="menu-outline"></ion-icon>
@@ -78,7 +78,7 @@
           </transition>
         </li>
       </div>
-      <div class="nav-section-list-child">
+      <div class="nav-section-lists-section">
         <li v-if="$store.state.loggedIn">
           <router-link to="/user" class="nav-section-button"
             ><ion-icon name="person-outline"></ion-icon
@@ -145,33 +145,33 @@ export default {
 </script>
 
 <style scoped>
-.nav-section-list {
+.nav-section-lists {
   width: 100%;
+  font-size: 2rem;
   display: flex;
   list-style: none;
   padding: 2rem 3rem;
-  justify-content: space-between;
-  font-size: 2rem;
-  background-color: white;
   margin: 0;
+  justify-content: space-between;
+  background-color: white;
   box-shadow: 0 4px 25px rgba(0, 0, 0, 0.05);
 }
 
-.nav-section-list-child {
+.nav-section-lists-section {
   display: flex;
   gap: 2rem;
 }
 
-.nav-section-button:link,
-.nav-section-button:visited {
-  text-decoration: none;
-  color: #343a40;
-  padding: 1rem;
-  border-radius: 5px;
-  font-weight: 700;
+.nav-section-button,
+.nav-dropdown-item {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  text-decoration: none;
+  color: #212529;
+  padding: 1rem;
+  border-radius: 5px;
+  font-weight: 700;
 }
 
 a:active,
@@ -183,16 +183,16 @@ a.router-link-active {
 
 ion-icon {
   font-size: 2.4rem;
-  color: black;
+  color: #212529;
 }
 
 /* Mobile */
-.nav-section-list-child-m li {
+.nav-section-lists-section-m li {
   position: relative;
 }
 
 .nav-section-button-m {
-  color: #343a40;
+  color: #212529;
   padding: 1rem;
   border-radius: 5px;
   font-weight: 700;
@@ -206,11 +206,10 @@ ion-icon {
 }
 
 .dropdown-menu {
-  padding: 1rem;
   display: grid;
   grid-auto-columns: 1fr;
   justify-items: left;
-  align-items: center;
+  padding: 1rem;
   gap: 0.5rem;
   background-color: white;
   border-radius: 5px;
@@ -219,17 +218,6 @@ ion-icon {
   top: 100%;
   left: 0;
   z-index: 1000;
-}
-
-.nav-dropdown-item {
-  text-decoration: none;
-  color: #343a40;
-  padding: 1rem;
-  border-radius: 5px;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
 }
 
 .dropdown-menu-enter-from,
@@ -250,17 +238,13 @@ ion-icon {
   opacity: 1;
 }
 
-/* 768px */
-@media (max-width: 48em) {
-}
-
 /* 640px */
 @media (max-width: 40em) {
-  .nav-section-list {
+  .nav-section-lists {
     padding: 1rem 1.5rem;
   }
 
-  .nav-section-list-child {
+  .nav-section-lists-section {
     gap: 0;
   }
 }
