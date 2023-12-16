@@ -5,15 +5,15 @@
         <h2 class="user-section-title">
           Welcome, {{ $store.state.userEmail.split("@")[0] }}!
         </h2>
-        <div class="user-section-links">
-          <ul class="user-section-list">
+        <div class="user-route-section">
+          <ul class="user-route-links">
             <li>
-              <router-link :to="wordsLink()" class="user-section-btn"
+              <router-link :to="wordsLink()" class="user-route-link"
                 >My Words</router-link
               >
             </li>
             <li>
-              <router-link :to="logsLink()" class="user-section-btn"
+              <router-link :to="logsLink()" class="user-route-link"
                 >+ Feedback</router-link
               >
             </li>
@@ -80,11 +80,11 @@ export default {
   font-size: 3rem;
 }
 
-.user-section-links {
+.user-route-section {
   margin: 2rem 0;
 }
 
-.user-section-list {
+.user-route-links {
   width: 20%;
   display: flex;
   justify-content: center;
@@ -95,23 +95,23 @@ export default {
   padding: 1rem;
 }
 
-.user-section-btn:link,
-.user-section-btn:visited {
-  text-decoration: none;
-  color: #343a40;
-  font-size: 2rem;
-  padding: 1rem;
-  border-radius: 20px;
-  font-weight: 700;
+.user-route-link:link,
+.user-route-link:visited {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  text-decoration: none;
+  color: #212529;
+  font-size: 2rem;
+  font-weight: 700;
+  padding: 1rem;
+  border-radius: 20px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.user-section-btn:hover {
+.user-route-link:hover {
   background-color: #fff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .route-child-enter-from,

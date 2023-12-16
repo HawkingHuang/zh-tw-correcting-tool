@@ -4,7 +4,7 @@
     <the-header></the-header>
     <the-nav></the-nav>
     <transition name="welcome" mode="out-in">
-      <div v-show="showWelcome" class="welcome-box">
+      <div v-if="showWelcome" class="welcome-box">
         Welcome, {{ $store.state.userEmail.split("@")[0] }}!
       </div>
     </transition>
@@ -54,7 +54,7 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #212529;
 }
 
 .main-section {
@@ -65,7 +65,7 @@ html {
   position: absolute;
   font-size: 1.6rem;
   top: 16rem;
-  right: 0.2rem;
+  right: 0.4rem;
   background-color: #40c057;
   color: white;
   padding: 1rem;
@@ -73,9 +73,26 @@ html {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+.welcome-enter-from,
+.welcome-leave-to,
 .route-enter-from,
 .route-leave-to {
   opacity: 0;
+}
+
+.welcome-enter-to,
+.welcome-leave-from,
+.route-enter-to,
+.route-leave-from {
+  opacity: 1;
+}
+
+.welcome-enter-active {
+  transition: all 0.8s ease-out;
+}
+
+.welcome-leave-active {
+  transition: all 0.8s ease-in;
 }
 
 .route-enter-active {
@@ -84,25 +101,5 @@ html {
 
 .route-leave-active {
   transition: opacity 0.3s ease-in;
-}
-
-.route-enter-to,
-.route-leave-from {
-  opacity: 1;
-}
-
-.welcome-enter-active,
-.welcome-leave-active {
-  transition: all 0.8s ease-out;
-}
-
-.welcome-enter-from,
-.welcome-leave-to {
-  opacity: 0;
-}
-
-.welcome-enter-to,
-.welcome-leave-from {
-  opacity: 1;
 }
 </style>
