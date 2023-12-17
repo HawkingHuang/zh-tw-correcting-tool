@@ -1,7 +1,7 @@
 <template>
   <div>
     <base-card>
-      <div class="signup-section">
+      <div class="login-section">
         <form @submit.prevent="login">
           <div class="form-control">
             <div class="flex">
@@ -152,7 +152,6 @@ input {
 }
 
 input:focus {
-  border-color: #3d008d;
   background-color: #f1f3f5;
   outline: none;
 }
@@ -165,6 +164,10 @@ button {
   cursor: pointer;
   border: none;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .flex {
@@ -189,6 +192,6 @@ button {
 
 ion-icon {
   font-size: 1.4rem;
-  color: black;
+  color: #212529;
 }
 </style>

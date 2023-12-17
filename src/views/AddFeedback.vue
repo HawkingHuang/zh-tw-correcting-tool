@@ -59,9 +59,6 @@ export default {
       showSuccess: false,
     };
   },
-  created() {
-    console.log("Received userId prop:", this.userId);
-  },
   methods: {
     async submitForm() {
       const colRef = collection(db, "zh-tw-correcting-library-feedback");
@@ -96,11 +93,9 @@ export default {
   color: #40c057;
 }
 
-.form {
-  margin: 2rem auto;
-}
-
-.title-section {
+.form,
+.title-section,
+.text-section {
   margin: 2rem auto;
 }
 
@@ -110,10 +105,6 @@ export default {
   padding: 0.2rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   border: none;
-}
-
-.text-section {
-  margin: 2rem auto;
 }
 
 textarea {
@@ -146,8 +137,8 @@ ion-icon {
   color: #212529;
 }
 
-.warning {
-  color: #fa5252;
+.warning,
+.success {
   margin: 1rem auto;
   padding: 0.2rem;
   font-size: 1.6rem;
@@ -155,19 +146,15 @@ ion-icon {
   font-weight: 700;
 }
 
-.warning-visibility {
-  visibility: visible;
+.warning {
+  color: #fa5252;
 }
 
 .success {
   color: #40c057;
-  margin: 1rem auto;
-  padding: 0.2rem;
-  font-size: 1.6rem;
-  visibility: hidden;
-  font-weight: 700;
 }
 
+.warning-visibility,
 .success-visibility {
   visibility: visible;
 }

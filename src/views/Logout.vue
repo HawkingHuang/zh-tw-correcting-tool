@@ -79,8 +79,12 @@ export default {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
+.btn:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
 ion-icon {
   font-size: 1.8rem;
-  color: black;
+  color: #212529;
 }
 </style>

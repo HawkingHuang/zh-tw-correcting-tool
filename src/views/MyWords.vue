@@ -111,17 +111,16 @@ export default {
 
 .correct,
 .incorrect {
+  font-size: 2rem;
   padding: 1rem 0;
   font-weight: 600;
 }
 
 .correct {
-  font-size: 2rem;
   color: #69db7c;
 }
 
 .incorrect {
-  font-size: 2rem;
   color: #f03e3e;
 }
 
@@ -156,8 +155,8 @@ ion-icon {
   }
 }
 
-/* 1024px */
-@media (max-width: 64em) {
+/* 1088px */
+@media (max-width: 68em) {
   .word-grid {
     grid-template-columns: repeat(6, 1fr);
   }

@@ -6,7 +6,6 @@
         <form>
           <div class="custom-flex">
             <div class="custom-flex-child">
-              <!-- <label for="correct">Correct</label> -->
               <input
                 v-model="formData.correct"
                 @input="clearWarning"
@@ -17,7 +16,6 @@
               />
             </div>
             <div class="custom-flex-child">
-              <!-- <label for="incorrect">Incorrect</label> -->
               <input
                 v-model="formData.incorrect"
                 @input="clearWarning"
@@ -185,8 +183,8 @@ ion-icon {
   color: #212529;
 }
 
-.warning {
-  color: #fa5252;
+.warning,
+.success {
   margin: 1rem auto;
   padding: 0.2rem;
   font-size: 1.6rem;
@@ -194,19 +192,15 @@ ion-icon {
   font-weight: 700;
 }
 
-.warning-visibility {
-  visibility: visible;
+.warning {
+  color: #fa5252;
 }
 
 .success {
   color: #40c057;
-  margin: 1rem auto;
-  padding: 0.2rem;
-  font-size: 1.6rem;
-  visibility: hidden;
-  font-weight: 700;
 }
 
+.warning-visibility,
 .success-visibility {
   visibility: visible;
 }

@@ -82,18 +82,17 @@ export default {};
 }
 
 .about-section-para p {
-  color: #212529;
   font-weight: 500;
 }
 
 strong {
-  font-weight: 900;
+  font-weight: 800;
 }
 
 .img {
   width: 40%;
   margin: 2rem auto;
-  border: 5px solid #868e96;
+  border: 4px solid #adb5bd;
   border-radius: 12px;
 }
 

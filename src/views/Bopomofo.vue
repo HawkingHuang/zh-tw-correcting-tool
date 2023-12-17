@@ -74,7 +74,6 @@ export default {
   },
   mounted() {
     this.fetchWords(this.$props.bopomofoId);
-    // this.fetchWords("bopomofo-8");
   },
 };
 </script>
@@ -88,6 +87,12 @@ export default {
 .no-result {
   font-size: 2rem;
   font-weight: 700;
+}
+
+.word-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  row-gap: 1rem;
 }
 
 .word-item-list {
@@ -114,18 +119,12 @@ export default {
 
 .correct {
   font-size: 2rem;
-  color: #343a40;
+  color: #212529;
 }
 
 .incorrect {
   font-size: 2rem;
   color: #f03e3e;
-}
-
-.word-grid {
-  display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  row-gap: 1rem;
 }
 
 /* 1024px */
