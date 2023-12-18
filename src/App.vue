@@ -49,6 +49,11 @@ html {
   font-size: 62.5%;
 }
 
+html,
+body {
+  -webkit-tap-highlight-color: transparent;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
