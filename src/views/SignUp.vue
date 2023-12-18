@@ -78,7 +78,7 @@ export default {
             this.password
           );
           const user = userCredential.user;
-          // console.log("User registered:", user);
+          console.log("User registered:", user);
           this.$router.push("/");
           const userDocRef = doc(
             db,

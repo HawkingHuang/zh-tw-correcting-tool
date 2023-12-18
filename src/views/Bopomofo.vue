@@ -68,7 +68,7 @@ export default {
       }
     },
   },
-  beforeRouteUpdate(to, from, next) {
+  beforeRouteUpdate(to, _, next) {
     this.fetchWords(to.params.bopomofoId);
     next();
   },
@@ -113,24 +113,33 @@ export default {
 
 .correct,
 .incorrect {
+  font-size: 2rem;
   padding: 1rem 0;
   font-weight: 600;
 }
 
-.correct {
-  font-size: 2rem;
-  color: #212529;
-}
-
 .incorrect {
-  font-size: 2rem;
   color: #f03e3e;
 }
 
-/* 1024px */
-@media (max-width: 64em) {
+/* 1200px */
+@media (max-width: 75em) {
+  .word-grid {
+    grid-template-columns: repeat(7, 1fr);
+  }
+}
+
+/* 1088px */
+@media (max-width: 68em) {
   .word-grid {
     grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+/* 928px */
+@media (max-width: 58em) {
+  .word-grid {
+    grid-template-columns: repeat(5, 1fr);
   }
 }
 

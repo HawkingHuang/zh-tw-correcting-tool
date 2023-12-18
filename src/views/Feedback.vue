@@ -44,7 +44,6 @@ export default {
         const feedbackSnapshot = await getDocs(feedbackRef);
         feedbackSnapshot.docs.forEach((doc) => {
           this.feedback.push({ ...doc.data() });
-          console.log(this.feedback);
         });
       } catch (error) {
         console.error("Error fetching feedback:", error);

@@ -168,7 +168,6 @@ export default {
 
 <style scoped>
 .search-bar {
-  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -215,23 +214,18 @@ export default {
 
 .correct,
 .incorrect {
+  font-size: 2rem;
   padding: 1rem 0;
   font-weight: 600;
 }
 
-.correct {
-  font-size: 2rem;
-  color: #343a40;
-}
-
 .incorrect {
-  font-size: 2rem;
   color: #f03e3e;
 }
 
 ion-icon {
   font-size: 2.4rem;
-  color: black;
+  color: #868e96;
 }
 
 .router-link-section {
@@ -271,10 +265,6 @@ ion-icon {
   border-radius: 5px;
 }
 
-ion-icon {
-  color: #868e96;
-}
-
 a:active,
 a:hover,
 a.router-link-active {
@@ -282,34 +272,25 @@ a.router-link-active {
 }
 
 .route-library-enter-from,
-.route-library-leave-to {
-  opacity: 0;
-}
-
-.route-library-enter-active {
-  transition: opacity 1.8s ease;
-}
-
-.route-library-leave-active {
-  transition: opacity 1.8s ease;
-}
-
-.route-library-enter-to,
-.route-library-leave-from {
-  opacity: 1;
-}
-
+.route-library-leave-to,
 .route-library-search-enter-from,
 .route-library-search-leave-to {
   opacity: 0;
 }
 
-.route-library-search-enter-active {
-  transition: opacity 0.5s ease;
-}
-
+.route-library-enter-to,
+.route-library-leave-from,
 .route-library-search-enter-to,
 .route-library-search-leave-from {
   opacity: 1;
+}
+
+.route-library-enter-active,
+.route-library-leave-active {
+  transition: opacity 1.8s ease;
+}
+
+.route-library-search-enter-active {
+  transition: opacity 0.5s ease;
 }
 </style>

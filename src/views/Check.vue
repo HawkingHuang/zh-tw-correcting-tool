@@ -2,7 +2,7 @@
   <div>
     <base-card>
       <section class="text-input-section">
-        <div class="original field">
+        <div class="original">
           <label for="original-text" class="original-title">Original</label>
           <textarea
             id="original-text"
@@ -11,7 +11,7 @@
             class="textarea"
           ></textarea>
         </div>
-        <div class="result field">
+        <div class="result">
           <label for="result-text" class="result-title">Corrected</label>
           <div id="result-text" class="result-text"></div>
         </div>
@@ -100,7 +100,6 @@ export default {
       resultContainer.innerHTML = correctedText;
     },
     reset() {
-      // console.log(this.words);
       this.userInput = "";
       const resultContainer = document.getElementById("result-text");
       resultContainer.innerHTML = "";
@@ -119,15 +118,10 @@ export default {
   margin: 1.5rem auto;
 }
 
-.field {
-  width: 100%;
-}
-
 .original,
 .result {
   padding: 1rem 2rem;
   width: 100%;
-  text-align: center;
 }
 
 .original-title,
@@ -143,6 +137,7 @@ label {
 
 textarea,
 .result-text {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
   width: 90%;
   height: 50rem;
   border: 3px solid #ced4da;
@@ -150,7 +145,6 @@ textarea,
   resize: none;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   font-size: 2rem;
-  color: #212529;
   padding: 0.5rem;
   overflow: auto;
 }
