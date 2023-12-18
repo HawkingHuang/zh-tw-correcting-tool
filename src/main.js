@@ -36,9 +36,9 @@ const firebaseApp = initializeApp(firebaseConfig);
 const db = getFirestore(firebaseApp);
 
 // Connect to the Firestore emulator only in development
-if (process.env.NODE_ENV === "development") {
-  connectFirestoreEmulator(db, "localhost", 8095);
-}
+// if (process.env.NODE_ENV === "development") {
+//   connectFirestoreEmulator(db, "localhost", 8095);
+// }
 
 // Categorized
 let hasInitialized = false;
