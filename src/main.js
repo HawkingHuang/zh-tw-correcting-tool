@@ -23,12 +23,12 @@ import {
 } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDRi_N0bR_9OjOZVdciEBETd_go7ve_1GE",
-  authDomain: "fir-course-48871.firebaseapp.com",
-  projectId: "fir-course-48871",
-  storageBucket: "fir-course-48871.appspot.com",
-  messagingSenderId: "517794616083",
-  appId: "1:517794616083:web:e4d7d82ee5bf06e8b100e6",
+  apiKey: process.env.VUE_APP_FIREBASE_API_KEY,
+  authDomain: process.env.VUE_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.VUE_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.VUE_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.VUE_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.VUE_APP_FIREBASE_APP_ID,
 };
 
 const firebaseApp = initializeApp(firebaseConfig);
