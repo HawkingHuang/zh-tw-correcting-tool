@@ -48,6 +48,15 @@ import { collection, addDoc } from "firebase/firestore";
 import { db } from "../main.js";
 
 export default {
+  metaInfo: {
+    meta: [
+      {
+        name: "add feedback",
+        content:
+          "The Add Feedback section allows users to leave their suggestions.",
+      },
+    ],
+  },
   props: ["userId"],
   data() {
     return {

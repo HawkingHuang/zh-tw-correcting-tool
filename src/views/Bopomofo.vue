@@ -18,6 +18,14 @@ import { db } from "../main.js";
 import { collection, getDocs, query, doc, getDoc } from "firebase/firestore";
 
 export default {
+  metaInfo: {
+    meta: [
+      {
+        name: "bopomofo",
+        content: "The Bopomofo section displays categorized data.",
+      },
+    ],
+  },
   props: ["bopomofoId"],
   data() {
     return {

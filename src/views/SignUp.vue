@@ -57,6 +57,14 @@ import { doc, addDoc, setDoc, collection } from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 export default {
+  metaInfo: {
+    meta: [
+      {
+        name: "signup",
+        content: "The Sign Up section is the place to register.",
+      },
+    ],
+  },
   data() {
     return {
       email: "",

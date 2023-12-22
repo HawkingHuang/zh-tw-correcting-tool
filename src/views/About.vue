@@ -58,7 +58,16 @@
 </template>
 
 <script>
-export default {};
+export default {
+  metaInfo: {
+    meta: [
+      {
+        name: "about",
+        content: "The About section describes how the tool works.",
+      },
+    ],
+  },
+};
 </script>
 
 <style scoped>

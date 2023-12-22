@@ -56,6 +56,14 @@ import {
 } from "firebase/auth";
 
 export default {
+  metaInfo: {
+    meta: [
+      {
+        name: "login",
+        content: "The Login section is the place to log in.",
+      },
+    ],
+  },
   data() {
     return {
       email: "",

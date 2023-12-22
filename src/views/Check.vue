@@ -33,6 +33,14 @@ import { db } from "../main.js";
 import { getDocs, collection } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 export default {
+  metaInfo: {
+    meta: [
+      {
+        name: "check",
+        content: "The Check section finds incorrect words for users.",
+      },
+    ],
+  },
   data() {
     return {
       userInput: "",

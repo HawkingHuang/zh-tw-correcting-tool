@@ -38,6 +38,14 @@ export default {
     MyWords,
     MyLogs,
   },
+  metaInfo: {
+    meta: [
+      {
+        name: "user",
+        content: "The User section is the home page for users.",
+      },
+    ],
+  },
   data() {
     return {
       userId: this.$store.state.userEmail.split("@")[0],

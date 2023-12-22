@@ -30,6 +30,14 @@ export default {
     TheNav,
     TheFooter,
   },
+  metaInfo: {
+    meta: [
+      {
+        name: "app",
+        content: "The App section is main section.",
+      },
+    ],
+  },
   computed: {
     showWelcome() {
       return this.$store.state.showWelcome;

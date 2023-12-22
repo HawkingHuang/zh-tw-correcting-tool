@@ -27,6 +27,14 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "../main.js";
 
 export default {
+  metaInfo: {
+    meta: [
+      {
+        name: "feedback",
+        content: "The Feedback section shows all suggestions from users.",
+      },
+    ],
+  },
   data() {
     return {
       feedback: [],

@@ -59,6 +59,14 @@ import { collection, addDoc } from "firebase/firestore";
 import { db } from "../main.js";
 
 export default {
+  metaInfo: {
+    meta: [
+      {
+        name: "custom",
+        content: "The Custom section lets users add their own words.",
+      },
+    ],
+  },
   data() {
     return {
       formData: {

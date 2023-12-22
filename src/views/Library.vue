@@ -57,6 +57,14 @@ export default {
   components: {
     Bopomofo,
   },
+  metaInfo: {
+    meta: [
+      {
+        name: "library",
+        content: "The Library section displays words from the Database.",
+      },
+    ],
+  },
   data() {
     return {
       searchTerm: "",

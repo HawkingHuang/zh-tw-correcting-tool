@@ -25,6 +25,14 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getDocs, collection, deleteDoc, doc } from "firebase/firestore";
 
 export default {
+  metaInfo: {
+    meta: [
+      {
+        name: "mywords",
+        content: "The My Words section displays words which users added in.",
+      },
+    ],
+  },
   props: ["userId"],
   data() {
     return {
