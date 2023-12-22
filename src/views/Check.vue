@@ -17,10 +17,10 @@
         </div>
       </section>
       <section class="button-section">
-        <button class="btn" @click="check">
+        <button class="btn" @click="check" aria-label="Check">
           <ion-icon name="checkmark-outline"></ion-icon>
         </button>
-        <button class="btn" @click="reset">
+        <button class="btn" @click="reset" aria-label="Refresh">
           <ion-icon name="refresh-outline"></ion-icon>
         </button>
       </section>
