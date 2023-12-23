@@ -285,6 +285,7 @@ a.router-link-active {
 .route-library-search-enter-from,
 .route-library-search-leave-to {
   opacity: 0;
+  transform: translateY(-20px);
 }
 
 .route-library-enter-to,
@@ -292,14 +293,15 @@ a.router-link-active {
 .route-library-search-enter-to,
 .route-library-search-leave-from {
   opacity: 1;
+  transform: translateY(0);
 }
 
 .route-library-enter-active,
 .route-library-leave-active {
-  transition: opacity 1.8s ease;
+  transition: all 1.8s ease;
 }
 
 .route-library-search-enter-active {
-  transition: opacity 0.5s ease;
+  transition: all 0.5s ease;
 }
 </style>

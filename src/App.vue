@@ -109,11 +109,21 @@ body {
   transition: all 0.8s ease-in;
 }
 
+.route-enter-from,
+.route-leave-to {
+  transform: translateY(-20px);
+}
+
+.route-enter-to,
+.route-leave-from {
+  transform: translateY(0);
+}
+
 .route-enter-active {
-  transition: opacity 0.3s ease-out;
+  transition: all 0.3s ease-out;
 }
 
 .route-leave-active {
-  transition: opacity 0.3s ease-in;
+  transition: all 0.3s ease-in;
 }
 </style>
