@@ -60,9 +60,10 @@ import { db } from "../main.js";
 
 export default {
   metaInfo: {
+    title: "Custom",
     meta: [
       {
-        name: "custom",
+        name: "description",
         content: "The Custom section lets users add their own words.",
       },
     ],

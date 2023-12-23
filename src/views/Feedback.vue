@@ -28,9 +28,10 @@ import { db } from "../main.js";
 
 export default {
   metaInfo: {
+    title: "Feedback",
     meta: [
       {
-        name: "feedback",
+        name: "description",
         content: "The Feedback section shows all suggestions from users.",
       },
     ],

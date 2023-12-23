@@ -19,9 +19,10 @@ import { collection, getDocs, query, doc, getDoc } from "firebase/firestore";
 
 export default {
   metaInfo: {
+    title: "Bopomofo",
     meta: [
       {
-        name: "bopomofo",
+        name: "description",
         content: "The Bopomofo section displays categorized data.",
       },
     ],

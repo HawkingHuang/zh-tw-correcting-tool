@@ -31,9 +31,10 @@ export default {
     TheFooter,
   },
   metaInfo: {
+    title: "Main",
     meta: [
       {
-        name: "app",
+        name: "description",
         content: "The App section is main section.",
       },
     ],

@@ -57,9 +57,10 @@ import {
 
 export default {
   metaInfo: {
+    title: "Login",
     meta: [
       {
-        name: "login",
+        name: "description",
         content: "The Login section is the place to log in.",
       },
     ],

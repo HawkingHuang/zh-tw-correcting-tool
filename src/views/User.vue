@@ -39,9 +39,10 @@ export default {
     MyLogs,
   },
   metaInfo: {
+    title: "User",
     meta: [
       {
-        name: "user",
+        name: "description",
         content: "The User section is the home page for users.",
       },
     ],

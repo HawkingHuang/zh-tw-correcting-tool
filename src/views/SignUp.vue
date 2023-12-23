@@ -58,9 +58,10 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 export default {
   metaInfo: {
+    title: "Sign Up",
     meta: [
       {
-        name: "signup",
+        name: "description",
         content: "The Sign Up section is the place to register.",
       },
     ],

@@ -34,9 +34,10 @@ import { getDocs, collection } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 export default {
   metaInfo: {
+    title: "Check",
     meta: [
       {
-        name: "check",
+        name: "description",
         content: "The Check section finds incorrect words for users.",
       },
     ],

@@ -21,9 +21,10 @@ import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
 
 export default {
   metaInfo: {
+    title: "Logout",
     meta: [
       {
-        name: "logout",
+        name: "description",
         content: "The Login section is the place to log out.",
       },
     ],

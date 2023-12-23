@@ -49,9 +49,10 @@ import { db } from "../main.js";
 
 export default {
   metaInfo: {
+    title: "Add Feedback",
     meta: [
       {
-        name: "add feedback",
+        name: "description",
         content:
           "The Add Feedback section allows users to leave their suggestions.",
       },

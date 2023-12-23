@@ -26,9 +26,10 @@ import { getDocs, collection, deleteDoc, doc } from "firebase/firestore";
 
 export default {
   metaInfo: {
+    title: "My Words",
     meta: [
       {
-        name: "mywords",
+        name: "description",
         content: "The My Words section displays words which users added in.",
       },
     ],

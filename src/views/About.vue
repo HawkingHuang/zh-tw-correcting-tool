@@ -60,9 +60,10 @@
 <script>
 export default {
   metaInfo: {
+    title: "About",
     meta: [
       {
-        name: "about",
+        name: "description",
         content: "The About section describes how the tool works.",
       },
     ],

@@ -58,9 +58,10 @@ export default {
     Bopomofo,
   },
   metaInfo: {
+    title: "Library",
     meta: [
       {
-        name: "library",
+        name: "description",
         content: "The Library section displays words from the Database.",
       },
     ],
