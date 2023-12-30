@@ -298,7 +298,7 @@ a.router-link-active {
 
 .route-library-enter-active,
 .route-library-leave-active {
-  transition: all 1.8s ease;
+  transition: all 1.2s ease;
 }
 
 .route-library-search-enter-active {
