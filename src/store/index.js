@@ -1,4 +1,6 @@
 import { createStore } from "vuex";
+import { db } from "../main.js";
+import { getDocs, collection } from "firebase/firestore";
 
 export default createStore({
   state() {
@@ -46,6 +48,30 @@ export default createStore({
       state.words = [];
     },
   },
-  actions: {},
-  modules: {},
+  actions: {
+    async fetchCustomWords(context) {
+      // Users custom words
+      const subCollectionName = context.state.userEmail.split("@")[0];
+      if (subCollectionName === "") {
+        console.log("No custom words to fetch because users didn't log in");
+      } else {
+        const colRef = collection(
+          db,
+          "zh-tw-correcting-library-users",
+          subCollectionName,
+          "users-custom-words"
+        );
+
+        const words = [];
+        const querySnapshotCustom = await getDocs(colRef);
+        querySnapshotCustom.docs.forEach((doc) => {
+          words.push({ ...doc.data() });
+          console.log(words);
+        });
+
+        context.commit("clearCustomWords");
+        context.commit("addCustomWords", words);
+      }
+    },
+  },
 });

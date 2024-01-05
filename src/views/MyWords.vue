@@ -22,7 +22,7 @@
 <script>
 import { db } from "../main.js";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { getDocs, collection, deleteDoc, doc } from "firebase/firestore";
+import { deleteDoc, doc } from "firebase/firestore";
 
 export default {
   metaInfo: {
@@ -42,25 +42,6 @@ export default {
     };
   },
   methods: {
-    async fetchCustomWords() {
-      const subCollectionName = this.$store.state.userEmail.split("@")[0];
-
-      const colRef = collection(
-        db,
-        "zh-tw-correcting-library-users",
-        subCollectionName,
-        "users-custom-words"
-      );
-
-      const words = [];
-      const querySnapshotCustom = await getDocs(colRef);
-      querySnapshotCustom.docs.forEach((doc) => {
-        this.words.push({ ...doc.data(), id: doc.id });
-      });
-      console.log(this.words);
-
-      this.$store.commit("addCustomWords", words);
-    },
     async deleteWord(index) {
       const subCollectionName = this.$store.state.userEmail.split("@")[0];
       const docId = this.words[index].id;
@@ -90,7 +71,9 @@ export default {
       if (user) {
         this.$store.commit("logIn");
         this.$store.commit("setUserEmail", user.email);
-        this.fetchCustomWords();
+        this.$store.dispatch("fetchCustomWords").then(() => {
+          this.words = this.$store.state.customWords;
+        });
       } else {
         this.$store.commit("logOut");
       }

@@ -104,7 +104,7 @@ export default {
           const user = userCredential.user;
           console.log("User logged in:", user);
           this.$router.push("/");
-          this.$store.commit("LogIn");
+          this.$store.commit("logIn");
           this.$store.commit("setUserEmail", user.email);
           this.$store.commit("showWelcomeOrNot");
           setTimeout(() => {

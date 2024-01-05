@@ -140,7 +140,6 @@ export default {
     },
   },
   created() {
-    this.handleResize();
     window.addEventListener("resize", this.handleResize);
   },
   mounted() {
@@ -191,7 +190,6 @@ a.router-link-active {
 
 ion-icon {
   font-size: 2.4rem;
-  color: #212529;
 }
 
 /* Mobile */
