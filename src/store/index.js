@@ -65,7 +65,7 @@ export default createStore({
         const words = [];
         const querySnapshotCustom = await getDocs(colRef);
         querySnapshotCustom.docs.forEach((doc) => {
-          words.push({ ...doc.data() });
+          words.push({ ...doc.data(), id: doc.id });
           console.log(words);
         });
 
