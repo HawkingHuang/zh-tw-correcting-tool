@@ -15,7 +15,7 @@
 
 <script>
 import { db } from "../main.js";
-import { collection, getDocs, query, doc, getDoc } from "firebase/firestore";
+import { collection, getDocs, doc, getDoc } from "firebase/firestore";
 
 export default {
   metaInfo: {
@@ -56,9 +56,7 @@ export default {
         if (fileSnapshot.exists()) {
           const bopomofoCollectionRef = collection(fileRef, "bopomofo");
 
-          const q = query(bopomofoCollectionRef);
-
-          const querySnapshot = await getDocs(q);
+          const querySnapshot = await getDocs(bopomofoCollectionRef);
 
           this.words = [];
           querySnapshot.forEach((doc) => {
@@ -82,7 +80,7 @@ export default {
     next();
   },
   mounted() {
-    this.fetchWords(this.$props.bopomofoId);
+    this.fetchWords(this.bopomofoId);
   },
 };
 </script>

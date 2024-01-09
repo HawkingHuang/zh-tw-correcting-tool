@@ -143,7 +143,7 @@ export default {
       this.searchTerm = "";
     },
   },
-  activated() {
+  mounted() {
     this.$store.dispatch("fetchCustomWords");
   },
 };

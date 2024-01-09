@@ -36,7 +36,6 @@ export default {
       if (!user) {
         this.$store.commit("logOut");
         this.$store.commit("setUserEmail", "");
-        console.log(this.$store.state.userEmail);
       } else {
         console.log("Failed to log out");
       }

@@ -104,9 +104,6 @@ export default {
           // Second sub
           const collection2Ref = collection(userDocRef, "users-custom-words");
           await addDoc(collection2Ref);
-          // Third sub
-          const collection3Ref = collection(userDocRef, "users-feedback");
-          await addDoc(collection3Ref);
         } catch (error) {
           console.error("Registration error:", error.message);
         }
