@@ -30,7 +30,6 @@ export default {
   props: ["bopomofoId"],
   data() {
     return {
-      searchTerm: "",
       words: [],
       loading: true,
     };
