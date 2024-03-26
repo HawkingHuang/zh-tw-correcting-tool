@@ -30,6 +30,8 @@
 </template>
 
 <script>
+import { ref, onMounted } from "vue";
+import { useStore } from "vuex";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import MyWords from "./MyWords.vue";
 import MyLogs from "./AddFeedback.vue";
@@ -38,44 +40,34 @@ export default {
     MyWords,
     MyLogs,
   },
-  metaInfo: {
-    title: "User",
-    meta: [
-      {
-        name: "description",
-        content: "The User section is the home page for users.",
-      },
-    ],
-  },
-  data() {
-    return {
-      userId: this.$store.state.userEmail.split("@")[0],
-    };
-  },
-  mounted() {
-    const auth = getAuth();
+  setup() {
+    const store = useStore();
 
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        this.$store.commit("logIn");
-        this.$store.commit("setUserEmail", user.email);
-        this.$store.commit("showWelcomeOrNot");
-        setTimeout(() => {
-          this.$store.commit("showWelcomeOrNot");
-        }, 3000);
-        this.userId = this.$store.state.userEmail.split("@")[0];
-      } else {
-        this.$store.commit("logOut");
-      }
+    let userId = ref(store.state.userEmail.split("@")[0]);
+    function wordsLink() {
+      return `/user/mywords/${userId.value}`;
+    }
+    function logsLink() {
+      return `/user/add-feedback/${userId.value}`;
+    }
+    onMounted(() => {
+      const auth = getAuth();
+
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          store.commit("logIn");
+          store.commit("setUserEmail", user.email);
+          store.commit("showWelcomeOrNot");
+          setTimeout(() => {
+            store.commit("showWelcomeOrNot");
+          }, 3000);
+          userId.value = store.state.userEmail.split("@")[0];
+        } else {
+          store.commit("logOut");
+        }
+      });
     });
-  },
-  methods: {
-    wordsLink() {
-      return `/user/mywords/${this.userId}`;
-    },
-    logsLink() {
-      return `/user/add-feedback/${this.userId}`;
-    },
+    return { userId, wordsLink, logsLink };
   },
 };
 </script>

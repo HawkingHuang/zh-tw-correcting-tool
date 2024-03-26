@@ -44,55 +44,43 @@
 </template>
 
 <script>
+import { ref } from "vue";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../main.js";
 
 export default {
-  metaInfo: {
-    title: "Add Feedback",
-    meta: [
-      {
-        name: "description",
-        content:
-          "The Add Feedback section allows users to leave their suggestions.",
-      },
-    ],
-  },
   props: ["userId"],
-  data() {
-    return {
-      formData: {
-        title: "",
-        text: "",
-      },
-      showWarning: false,
-      showSuccess: false,
-    };
-  },
-  methods: {
-    async submitForm() {
+  setup() {
+    let formData = ref({ title: "", text: "" });
+    let showWarning = ref(false);
+    let showSuccess = ref(false);
+
+    async function submitForm() {
       const colRef = collection(db, "zh-tw-correcting-library-feedback");
 
-      if (this.formData.title !== "" && this.formData.text !== "") {
+      if (formData.value.title !== "" && formData.value.text !== "") {
         try {
-          await addDoc(colRef, this.formData);
+          await addDoc(colRef, formData.value);
           console.log("Document added successfully!");
-          this.formData.title = "";
-          this.formData.text = "";
-          this.showSuccess = true;
+          formData.value.title = "";
+          formData.value.text = "";
+          showSuccess.value = true;
           setTimeout(() => {
-            this.showSuccess = false;
+            showSuccess.value = false;
           }, 5000);
         } catch (error) {
           console.error("Error adding document: ", error);
         }
       } else {
-        this.showWarning = true;
+        showWarning.value = true;
       }
-    },
-    clearWarning() {
-      this.showWarning = false;
-    },
+    }
+
+    function clearWarning() {
+      showWarning.value = false;
+    }
+
+    return { formData, showWarning, showSuccess, submitForm, clearWarning };
   },
 };
 </script>

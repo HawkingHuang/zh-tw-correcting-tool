@@ -20,6 +20,8 @@
 </template>
 
 <script>
+import { computed } from "vue";
+import { useStore } from "vuex";
 import TheHeader from "./components/TheHeader.vue";
 import TheNav from "./components/TheNav.vue";
 import TheFooter from "./components/TheFooter.vue";
@@ -30,19 +32,11 @@ export default {
     TheNav,
     TheFooter,
   },
-  metaInfo: {
-    title: "Main",
-    meta: [
-      {
-        name: "description",
-        content: "The App section is main section.",
-      },
-    ],
-  },
-  computed: {
-    showWelcome() {
-      return this.$store.state.showWelcome;
-    },
+  setup() {
+    const store = useStore();
+
+    const showWelcome = computed(() => store.state.showWelcome);
+    return { showWelcome };
   },
 };
 </script>
