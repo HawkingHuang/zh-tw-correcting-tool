@@ -52,43 +52,37 @@
 </template>
 
 <script>
+import { ref } from "vue";
+import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 import { db } from "../main.js";
 import { doc, addDoc, setDoc, collection } from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 export default {
-  metaInfo: {
-    title: "Sign Up",
-    meta: [
-      {
-        name: "description",
-        content: "The Sign Up section is the place to register.",
-      },
-    ],
-  },
-  data() {
-    return {
-      email: "",
-      password: "",
-      isEmailValid: null,
-      isPasswordValid: null,
-      isDataValid: true,
-    };
-  },
-  methods: {
-    async register() {
-      if (this.isEmailValid && this.isPasswordValid) {
+  setup() {
+    const store = useStore();
+    const router = useRouter();
+
+    let email = ref("");
+    let password = ref("");
+    let isEmailValid = ref(true);
+    let isPasswordValid = ref(true);
+    let isDataValid = ref(true);
+
+    async function register() {
+      if (isEmailValid.value && isPasswordValid.value) {
         const auth = getAuth();
 
         try {
           const userCredential = await createUserWithEmailAndPassword(
             auth,
-            this.email,
-            this.password
+            email.value,
+            password.value
           );
           const user = userCredential.user;
           console.log("User registered:", user);
-          this.$router.push("/");
+          router.push("/");
           const userDocRef = doc(
             db,
             "zh-tw-correcting-library-users",
@@ -108,21 +102,34 @@ export default {
           console.error("Registration error:", error.message);
         }
       } else {
-        this.isDataValid = false;
+        isDataValid.value = false;
         setTimeout(() => {
-          this.isDataValid = !this.isDataValid;
+          isDataValid.value = !isDataValid.value;
         }, 3000);
       }
-    },
-    validateEmail() {
+    }
+
+    function validateEmail() {
       const emailRegex =
         /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/;
-      this.isEmailValid = emailRegex.test(this.email);
-    },
-    validatePassword() {
+      isEmailValid.value = emailRegex.test(email.value);
+    }
+
+    function validatePassword() {
       const passwordRegex = /^[\d\w]{6,20}$/i;
-      this.isPasswordValid = passwordRegex.test(this.password);
-    },
+      isPasswordValid.value = passwordRegex.test(password.value);
+    }
+
+    return {
+      email,
+      password,
+      isEmailValid,
+      isPasswordValid,
+      isDataValid,
+      register,
+      validateEmail,
+      validatePassword,
+    };
   },
 };
 </script>

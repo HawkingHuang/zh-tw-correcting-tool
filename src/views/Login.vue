@@ -49,6 +49,9 @@
 </template>
 
 <script>
+import { ref, onMounted } from "vue";
+import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 import {
   getAuth,
   signInWithEmailAndPassword,
@@ -56,80 +59,85 @@ import {
 } from "firebase/auth";
 
 export default {
-  metaInfo: {
-    title: "Login",
-    meta: [
-      {
-        name: "description",
-        content: "The Login section is the place to log in.",
-      },
-    ],
-  },
-  data() {
-    return {
-      email: "",
-      password: "",
-      isEmailValid: true,
-      isPasswordValid: true,
-      isDataValid: true,
-    };
-  },
-  mounted() {
-    const auth = getAuth();
+  setup() {
+    const store = useStore();
+    const router = useRouter();
 
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        this.$store.commit("logIn");
-        this.$store.commit("setUserEmail", user.email);
-        this.$store.commit("showWelcomeOrNot");
-        setTimeout(() => {
-          this.$store.commit("showWelcomeOrNot");
-        }, 3000);
-      } else {
-        this.$store.commit("logOut");
-      }
-    });
-  },
-  methods: {
-    async login() {
-      if (this.isEmailValid && this.isPasswordValid) {
+    let email = ref("");
+    let password = ref("");
+    let isEmailValid = ref(true);
+    let isPasswordValid = ref(true);
+    let isDataValid = ref(true);
+
+    async function login() {
+      if (isEmailValid.value && isPasswordValid.value) {
         const auth = getAuth();
 
         try {
           const userCredential = await signInWithEmailAndPassword(
             auth,
-            this.email,
-            this.password
+            email.value,
+            password.value
           );
           const user = userCredential.user;
           console.log("User logged in:", user);
-          this.$router.push("/");
-          this.$store.commit("logIn");
-          this.$store.commit("setUserEmail", user.email);
-          this.$store.commit("showWelcomeOrNot");
+          router.push("/");
+          store.commit("logIn");
+          store.commit("setUserEmail", user.email);
+          store.commit("showWelcomeOrNot");
           setTimeout(() => {
-            this.$store.commit("showWelcomeOrNot");
+            store.commit("showWelcomeOrNot");
           }, 3000);
         } catch (error) {
           console.error("Login error:", error.message);
           if (error.message.includes("auth/invalid-login-credentials")) {
-            this.isDataValid = false;
+            isDataValid.value = false;
             setTimeout(() => {
-              this.isDataValid = !this.isDataValid;
+              isDataValid.value = !isDataValid.value;
             }, 3000);
           }
         }
       }
-    },
-    validateEmail() {
+    }
+
+    function validateEmail() {
       const emailRegex =
         /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/;
-      this.isEmailValid = emailRegex.test(this.email);
-    },
-    validatePassword() {
+      isEmailValid.value = emailRegex.test(email.value);
+    }
+
+    function validatePassword() {
       const passwordRegex = /^[\d\w]{6,20}$/i;
-      this.isPasswordValid = passwordRegex.test(this.password);
-    },
+      isPasswordValid.value = passwordRegex.test(password.value);
+    }
+
+    onMounted(() => {
+      const auth = getAuth();
+
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          store.commit("logIn");
+          store.commit("setUserEmail", user.email);
+          store.commit("showWelcomeOrNot");
+          setTimeout(() => {
+            store.commit("showWelcomeOrNot");
+          }, 3000);
+        } else {
+          store.commit("logOut");
+        }
+      });
+    });
+
+    return {
+      email,
+      password,
+      isEmailValid,
+      isPasswordValid,
+      isDataValid,
+      login,
+      validateEmail,
+      validatePassword,
+    };
   },
 };
 </script>
