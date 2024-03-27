@@ -17,46 +17,47 @@
 </template>
 
 <script>
+import { onMounted } from "vue";
+import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
 
 export default {
-  metaInfo: {
-    title: "Logout",
-    meta: [
-      {
-        name: "description",
-        content: "The Login section is the place to log out.",
-      },
-    ],
-  },
-  mounted() {
-    const auth = getAuth();
+  setup() {
+    const store = useStore();
+    const router = useRouter();
 
-    onAuthStateChanged(auth, (user) => {
-      if (!user) {
-        this.$store.commit("logOut");
-        this.$store.commit("setUserEmail", "");
-      } else {
-        console.log("Failed to log out");
-      }
-    });
-  },
-  methods: {
-    async logOut() {
+    async function logOut() {
       const auth = getAuth();
       try {
         await signOut(auth);
         console.log("The user signed out");
-        this.$router.push("/");
-        this.$store.commit("logOut");
-        this.$store.commit("clearCustomWords");
+        router.push("/");
+        store.commit("logOut");
+        store.commit("clearCustomWords");
       } catch (error) {
         console.error(error.message);
       }
-    },
-    stay() {
-      this.$router.push("/");
-    },
+    }
+
+    function stay() {
+      router.push("/");
+    }
+
+    onMounted(() => {
+      const auth = getAuth();
+
+      onAuthStateChanged(auth, (user) => {
+        if (!user) {
+          store.commit("logOut");
+          store.commit("setUserEmail", "");
+        } else {
+          console.log("Failed to log out");
+        }
+      });
+    });
+
+    return { logOut, stay };
   },
 };
 </script>

@@ -23,41 +23,31 @@
 </template>
 
 <script>
+import { ref, onMounted } from "vue";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../main.js";
 
 export default {
-  metaInfo: {
-    title: "Feedback",
-    meta: [
-      {
-        name: "description",
-        content: "The Feedback section shows all suggestions from users.",
-      },
-    ],
-  },
-  data() {
-    return {
-      feedback: [],
-    };
-  },
-  mounted() {
-    this.fetchFeedback();
-  },
-  methods: {
-    async fetchFeedback() {
+  setup() {
+    let feedback = ref([]);
+
+    async function fetchFeedback() {
       try {
-        this.feedback = [];
+        feedback.value = [];
         const feedbackRef = collection(db, "zh-tw-correcting-library-feedback");
 
         const feedbackSnapshot = await getDocs(feedbackRef);
         feedbackSnapshot.docs.forEach((doc) => {
-          this.feedback.push({ ...doc.data() });
+          feedback.value.push({ ...doc.data() });
         });
       } catch (error) {
         console.error("Error fetching feedback:", error);
       }
-    },
+    }
+
+    onMounted(() => fetchFeedback());
+
+    return { feedback, fetchFeedback };
   },
 };
 </script>
