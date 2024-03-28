@@ -55,32 +55,21 @@
 </template>
 
 <script>
+import { ref, reactive } from "vue";
+import { useStore } from "vuex";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../main.js";
 
 export default {
-  metaInfo: {
-    title: "Custom",
-    meta: [
-      {
-        name: "description",
-        content: "The Custom section lets users add their own words.",
-      },
-    ],
-  },
-  data() {
-    return {
-      formData: {
-        correct: "",
-        incorrect: "",
-      },
-      showWarning: false,
-      showSuccess: false,
-      allowAdding: true,
-    };
-  },
-  methods: {
-    async submitForm() {
+  setup() {
+    const store = useStore();
+
+    let formData = reactive({ correct: "", incorrect: "" });
+    let showWarning = ref(false);
+    let showSuccess = ref(false);
+    let allowAdding = ref(true);
+
+    async function submitForm() {
       // For adding central database (do not delete)
       // const subCollectionName = "bopomofo-31";
 
@@ -100,11 +89,11 @@ export default {
       //   console.error("Error adding document: ", error);
       // }
       // For adding indivisual database
-      const subCollectionName = this.$store.state.userEmail.split("@")[0];
+      const subCollectionName = store.state.userEmail.split("@")[0];
       if (subCollectionName === "") {
-        this.allowAdding = false;
+        allowAdding.value = false;
         setTimeout(() => {
-          this.allowAdding = true;
+          allowAdding.value = true;
         }, 5000);
       } else {
         const colRef = collection(
@@ -114,27 +103,37 @@ export default {
           "users-custom-words"
         );
 
-        if (this.formData.correct !== "" && this.formData.incorrect !== "") {
+        if (formData.correct !== "" && formData.incorrect !== "") {
           try {
-            await addDoc(colRef, this.formData);
+            await addDoc(colRef, formData);
             console.log("Document added successfully!");
-            this.formData.correct = "";
-            this.formData.incorrect = "";
-            this.showSuccess = true;
+            formData.correct = "";
+            formData.incorrect = "";
+            showSuccess.value = true;
             setTimeout(() => {
-              this.showSuccess = false;
+              showSuccess.value = false;
             }, 5000);
           } catch (error) {
             console.error("Error adding document: ", error);
           }
         } else {
-          this.showWarning = true;
+          showWarning.value = true;
         }
       }
-    },
-    clearWarning() {
-      this.showWarning = false;
-    },
+    }
+
+    function clearWarning() {
+      showWarning.value = false;
+    }
+
+    return {
+      formData,
+      showWarning,
+      showSuccess,
+      allowAdding,
+      submitForm,
+      clearWarning,
+    };
   },
 };
 </script>

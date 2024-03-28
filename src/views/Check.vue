@@ -29,52 +29,20 @@
 </template>
 
 <script>
+import { ref, computed, onMounted } from "vue";
+import { useStore } from "vuex";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 export default {
-  metaInfo: {
-    title: "Check",
-    meta: [
-      {
-        name: "description",
-        content: "The Check section finds incorrect words for users.",
-      },
-    ],
-  },
-  data() {
-    return {
-      userInput: "",
-    };
-  },
-  mounted() {
-    const auth = getAuth();
+  setup() {
+    const store = useStore();
 
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        this.$store.commit("logIn");
-        this.$store.commit("setUserEmail", user.email);
+    let userInput = ref("");
 
-        if (!this.$store.state.welcomed) {
-          this.$store.commit("showWelcomeOrNot");
-          setTimeout(() => {
-            this.$store.commit("showWelcomeOrNot");
-            this.$store.dispatch("fetchCustomWords");
-          }, 3000);
-        }
-        this.$store.commit("changeWelcomed");
-      } else {
-        this.$store.commit("logOut");
-      }
-    });
-  },
-  computed: {
-    words() {
-      return this.$store.getters.words;
-    },
-  },
-  methods: {
-    check() {
-      let correctedText = this.userInput;
-      this.words.forEach((word) => {
+    let words = computed(() => store.getters.words);
+
+    function check() {
+      let correctedText = userInput.value;
+      words.value.forEach((word) => {
         const regex = new RegExp(word.incorrect, "gi");
         correctedText = correctedText.replace(
           regex,
@@ -84,12 +52,37 @@ export default {
 
       const resultContainer = document.getElementById("result-text");
       resultContainer.innerHTML = correctedText;
-    },
-    reset() {
-      this.userInput = "";
+    }
+
+    function reset() {
+      userInput.value = "";
       const resultContainer = document.getElementById("result-text");
       resultContainer.innerHTML = "";
-    },
+    }
+
+    onMounted(() => {
+      const auth = getAuth();
+
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          store.commit("logIn");
+          store.commit("setUserEmail", user.email);
+
+          if (!store.state.welcomed) {
+            store.commit("showWelcomeOrNot");
+            setTimeout(() => {
+              store.commit("showWelcomeOrNot");
+              store.dispatch("fetchCustomWords");
+            }, 3000);
+          }
+          store.commit("changeWelcomed");
+        } else {
+          store.commit("logOut");
+        }
+      });
+    });
+
+    return { userInput, words, check, reset };
   },
 };
 </script>
