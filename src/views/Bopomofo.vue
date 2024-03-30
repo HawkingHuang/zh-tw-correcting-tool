@@ -14,35 +14,22 @@
 </template>
 
 <script>
+import { ref, computed, onMounted, watch } from "vue";
+import { useRouter } from "vue-router";
 import { db } from "../main.js";
 import { collection, getDocs, doc, getDoc } from "firebase/firestore";
 
 export default {
-  metaInfo: {
-    title: "Bopomofo",
-    meta: [
-      {
-        name: "description",
-        content: "The Bopomofo section displays categorized data.",
-      },
-    ],
-  },
   props: ["bopomofoId"],
-  data() {
-    return {
-      words: [],
-      loading: true,
-    };
-  },
-  computed: {
-    noResult() {
-      return this.words.length === 0;
-    },
-  },
-  methods: {
-    async fetchWords(bopomofoId) {
+  setup(props) {
+    const router = useRouter();
+
+    let words = ref([]);
+    let loading = ref(true);
+
+    async function fetchWords(bopomofoId) {
       try {
-        this.loading = true;
+        loading.value = true;
 
         const fileRef = doc(
           db,
@@ -57,29 +44,35 @@ export default {
 
           const querySnapshot = await getDocs(bopomofoCollectionRef);
 
-          this.words = [];
+          words.value = [];
           querySnapshot.forEach((doc) => {
-            this.words.push(doc.data());
+            words.value.push(doc.data());
           });
 
-          console.log("Fetched words:", this.words);
+          console.log("Fetched words:", words.value);
         } else {
-          this.words = [];
+          words.value = [];
           console.error("Document not found");
         }
       } catch (error) {
         console.error("Error fetching words:", error);
       } finally {
-        this.loading = false;
+        loading.value = false;
       }
-    },
-  },
-  beforeRouteUpdate(to, _, next) {
-    this.fetchWords(to.params.bopomofoId);
-    next();
-  },
-  mounted() {
-    this.fetchWords(this.bopomofoId);
+    }
+
+    onMounted(() => fetchWords(props.bopomofoId));
+
+    watch(
+      () => router.currentRoute.value.params.bopomofoId,
+      (newValue, oldValue) => {
+        fetchWords(newValue);
+      }
+    );
+
+    const noResult = computed(() => words.value.length === 0);
+
+    return { words, loading, fetchWords, noResult };
   },
 };
 </script>

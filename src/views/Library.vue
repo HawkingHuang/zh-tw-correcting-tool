@@ -50,101 +50,99 @@
 </template>
 
 <script>
+import { ref, computed, watch, onMounted } from "vue";
+import { useStore } from "vuex";
 import Bopomofo from "./Bopomofo.vue";
 export default {
   components: {
     Bopomofo,
   },
-  metaInfo: {
-    title: "Library",
-    meta: [
-      {
-        name: "description",
-        content: "The Library section displays words from the Database.",
-      },
-    ],
-  },
-  data() {
-    return {
-      searchTerm: "",
-      showRouterLink: true,
-      subsets: [
-        { name: "bopomofo-1", label: "ㄅ" },
-        { name: "bopomofo-3", label: "ㄆ" },
-        { name: "bopomofo-2", label: "ㄇ" },
-        { name: "bopomofo-4", label: "ㄈ" },
-        { name: "bopomofo-5", label: "ㄉ" },
-        { name: "bopomofo-6", label: "ㄊ" },
-        { name: "bopomofo-7", label: "ㄋ" },
-        { name: "bopomofo-8", label: "ㄌ" },
-        { name: "bopomofo-9", label: "ㄍ" },
-        { name: "bopomofo-10", label: "ㄎ" },
-        { name: "bopomofo-11", label: "ㄏ" },
-        { name: "bopomofo-12", label: "ㄐ" },
-        { name: "bopomofo-13", label: "ㄑ" },
-        { name: "bopomofo-14", label: "ㄒ" },
-        { name: "bopomofo-15", label: "ㄓ" },
-        { name: "bopomofo-16", label: "ㄔ" },
-        { name: "bopomofo-17", label: "ㄕ" },
-        { name: "bopomofo-18", label: "ㄖ" },
-        { name: "bopomofo-19", label: "ㄗ" },
-        { name: "bopomofo-20", label: "ㄘ" },
-        { name: "bopomofo-21", label: "ㄙ" },
-        { name: "bopomofo-22", label: "ㄧ" },
-        { name: "bopomofo-23", label: "ㄨ" },
-        { name: "bopomofo-24", label: "ㄩ" },
-        { name: "bopomofo-25", label: "ㄚ" },
-        { name: "bopomofo-26", label: "ㄛ" },
-        { name: "bopomofo-27", label: "ㄜ" },
-        { name: "bopomofo-28", label: "ㄝ" },
-        { name: "bopomofo-29", label: "ㄞ" },
-        { name: "bopomofo-30", label: "ㄟ" },
-        { name: "bopomofo-31", label: "ㄠ" },
-        { name: "bopomofo-32", label: "ㄡ" },
-        { name: "bopomofo-33", label: "ㄢ" },
-        { name: "bopomofo-34", label: "ㄣ" },
-        { name: "bopomofo-35", label: "ㄤ" },
-        { name: "bopomofo-36", label: "ㄥ" },
-        { name: "bopomofo-37", label: "ㄦ" },
-      ],
-    };
-  },
-  computed: {
-    words() {
-      return this.$store.getters.words;
-    },
-    filteredWords() {
-      return this.words.filter((word) => {
-        const searchString = this.searchTerm;
+  setup() {
+    const store = useStore();
+
+    let searchTerm = ref("");
+    let showRouterLink = ref(true);
+    const subsets = ref([
+      { name: "bopomofo-1", label: "ㄅ" },
+      { name: "bopomofo-3", label: "ㄆ" },
+      { name: "bopomofo-2", label: "ㄇ" },
+      { name: "bopomofo-4", label: "ㄈ" },
+      { name: "bopomofo-5", label: "ㄉ" },
+      { name: "bopomofo-6", label: "ㄊ" },
+      { name: "bopomofo-7", label: "ㄋ" },
+      { name: "bopomofo-8", label: "ㄌ" },
+      { name: "bopomofo-9", label: "ㄍ" },
+      { name: "bopomofo-10", label: "ㄎ" },
+      { name: "bopomofo-11", label: "ㄏ" },
+      { name: "bopomofo-12", label: "ㄐ" },
+      { name: "bopomofo-13", label: "ㄑ" },
+      { name: "bopomofo-14", label: "ㄒ" },
+      { name: "bopomofo-15", label: "ㄓ" },
+      { name: "bopomofo-16", label: "ㄔ" },
+      { name: "bopomofo-17", label: "ㄕ" },
+      { name: "bopomofo-18", label: "ㄖ" },
+      { name: "bopomofo-19", label: "ㄗ" },
+      { name: "bopomofo-20", label: "ㄘ" },
+      { name: "bopomofo-21", label: "ㄙ" },
+      { name: "bopomofo-22", label: "ㄧ" },
+      { name: "bopomofo-23", label: "ㄨ" },
+      { name: "bopomofo-24", label: "ㄩ" },
+      { name: "bopomofo-25", label: "ㄚ" },
+      { name: "bopomofo-26", label: "ㄛ" },
+      { name: "bopomofo-27", label: "ㄜ" },
+      { name: "bopomofo-28", label: "ㄝ" },
+      { name: "bopomofo-29", label: "ㄞ" },
+      { name: "bopomofo-30", label: "ㄟ" },
+      { name: "bopomofo-31", label: "ㄠ" },
+      { name: "bopomofo-32", label: "ㄡ" },
+      { name: "bopomofo-33", label: "ㄢ" },
+      { name: "bopomofo-34", label: "ㄣ" },
+      { name: "bopomofo-35", label: "ㄤ" },
+      { name: "bopomofo-36", label: "ㄥ" },
+      { name: "bopomofo-37", label: "ㄦ" },
+    ]);
+
+    function bopomofoLink(index) {
+      return `/library/bopomofo-${index + 1}`;
+    }
+
+    function emptyField() {
+      searchTerm.value = "";
+    }
+
+    onMounted(() => store.dispatch("fetchCustomWords"));
+
+    const words = computed(() => store.getters.words);
+    const filteredWords = computed(() => {
+      return words.value.filter((word) => {
+        const searchString = searchTerm.value;
         return (
           word.correct.includes(searchString) ||
           word.incorrect.includes(searchString)
         );
       });
-    },
-    noResult() {
-      return this.filteredWords.length === 0;
-    },
-  },
-  watch: {
-    searchTerm(newValue) {
+    });
+
+    const noResult = computed(() => filteredWords.value.length === 0);
+
+    watch(searchTerm, function (newValue) {
       if (newValue.trim() !== "") {
-        this.showRouterLink = false;
+        showRouterLink.value = false;
       } else {
-        this.showRouterLink = true;
+        showRouterLink.value = true;
       }
-    },
-  },
-  methods: {
-    bopomofoLink(index) {
-      return `/library/bopomofo-${index + 1}`;
-    },
-    emptyField() {
-      this.searchTerm = "";
-    },
-  },
-  mounted() {
-    this.$store.dispatch("fetchCustomWords");
+    });
+
+    return {
+      searchTerm,
+      showRouterLink,
+      subsets,
+      bopomofoLink,
+      emptyField,
+      words,
+      filteredWords,
+      noResult,
+    };
   },
 };
 </script>
